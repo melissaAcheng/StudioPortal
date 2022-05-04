@@ -4,6 +4,8 @@ Name: Melissa Cheng
 Project Title: Studio Portal
 Project Stack: MERN
 GitHub Repo Link: https://github.com/melissaAcheng/StudioPortal
+Wireframe: https://www.figma.com/file/4JNKChGGN0lsGREBvKcVcr/Studio-Portal?node-id=0%3A1
+
 
 Project Description: A portal for private music teachers to write lesson notes/homework per student. Students can then log in and view notes.
 
