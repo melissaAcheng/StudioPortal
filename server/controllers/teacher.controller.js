@@ -1,21 +1,117 @@
 const Teacher = require("../models/teacher.model");
-const Student = require("../models/student.model");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 module.exports = {
   // queries here
-  createNewTeacher: (req, res) => {
-    Teacher.create(req.body)
+  registerTeacher: (req, res) => {
+    const teacher = new Teacher(req.body);
+    teacher
+      .save()
       .then((newTeacher) => {
-        console.log("createNewTeacher success");
         console.log(newTeacher);
-        res.json(newTeacher);
+        console.log("Successfully Registered!");
+        res.json({
+          successMessage: "Thank you for registering",
+          teacher: newTeacher,
+        });
       })
       .catch((err) => {
-        console.log("createNewTeacher failed");
-        console.log(err);
+        console.log("Registration not successful!");
         res.status(400).json(err);
       });
   },
+
+  loginTeacher: (req, res) => {
+    Teacher.findOne({ email: req.body.email })
+      .then((teacherRecord) => {
+        if (teacherRecord === null) {
+          res.status(400).json({ message: "Invalid teacher login attempt" });
+        } else {
+          // if email exists
+          bcrypt
+            .compare(req.body.password, teacherRecord.password)
+            .then((isPasswordValid) => {
+              if (isPasswordValid) {
+                console.log("Password is valid");
+                res
+                  .cookie(
+                    "usertoken",
+                    jwt.sign(
+                      {
+                        // payload is the data we want to save and use
+                        id: teacherRecord._id,
+                        email: teacherRecord.email,
+                        firstName: teacherRecord.firstName,
+                        lastName: teacherRecord.lastName,
+                      },
+                      process.env.JWT_SECRET
+                    ),
+                    {
+                      httpOnly: true,
+                      expires: new Date(Date.now() + 9000000),
+                    }
+                  )
+                  .json({
+                    message: "Successful Teacher Login",
+                    teacherLoggedIn: teacherRecord.email,
+                    // teacherId: teacherRecord._id,
+                  });
+              } else {
+                res.status(400).json({
+                  message: "Invalid attempt",
+                });
+              }
+            })
+            .catch((err) => {
+              console.log(err);
+              res.status(400).json({ message: "Invalid attempt" });
+            });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(400).json({ message: "Invalid attempt" });
+      });
+  },
+
+  logoutTeacher: (req, res) => {
+    console.log("logging out");
+    res.clearCookie("usertoken");
+    res.json({
+      message: "You have successfully logged out",
+    });
+  },
+
+  getLoggedInTeacher: (req, res) => {
+    const decodedJWT = jwt.decode(req.cookies.usertoken, {
+      complete: true,
+    });
+    Teacher.findOne({
+      _id: decodedJWT.payload.id,
+    })
+      .then((teacher) => {
+        console.log(teacher);
+        res.json(teacher);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
+
+  // createNewTeacher: (req, res) => {
+  //   Teacher.create(req.body)
+  //     .then((newTeacher) => {
+  //       console.log("createNewTeacher success");
+  //       console.log(newTeacher);
+  //       res.json(newTeacher);
+  //     })
+  //     .catch((err) => {
+  //       console.log("createNewTeacher failed");
+  //       console.log(err);
+  //       res.status(400).json(err);
+  //     });
+  // },
   getAllTeachers: (req, res) => {
     Teacher.find()
       .then((allTeachers) => {

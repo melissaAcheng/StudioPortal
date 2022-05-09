@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
-const dbName = "studioPortal";
+const dbName = process.env.DB_NAME;
+
 mongoose
   .connect(`mongodb://localhost/${dbName}`, {
     useNewURLParser: true,

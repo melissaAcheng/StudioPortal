@@ -1,10 +1,19 @@
 const Notes = require("../models/notes.model");
-const Student = require("../models/student.model");
+const jwt = require("jsonwebtoken");
 
 module.exports = {
   // queries here
   createNewNotes: (req, res) => {
-    Notes.create(req.body)
+    const newNoteObject = new Notes(req.body);
+
+    const decodedJWT = jwt.decode(req.cookies.teachertoken, {
+      complete: true,
+    });
+
+    newNoteObject.teacher = decodedJWT.payload.id;
+
+    newNoteObject
+      .save()
       .then((newNotes) => {
         console.log("createNewNotes success");
         console.log(newNotes);
@@ -18,6 +27,7 @@ module.exports = {
   },
   getAllNotes: (req, res) => {
     Notes.find()
+      .populate("teacher", "firstName lastName email")
       .then((allNotess) => {
         console.log("getAllNotess success");
         console.log(allNotess);
