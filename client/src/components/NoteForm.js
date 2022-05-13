@@ -19,7 +19,6 @@ const NoteForm = ({
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    debugger;
     onSubmitProp({
       student: student,
       date: date,
@@ -28,6 +27,8 @@ const NoteForm = ({
       createdBy: teacher,
     });
   };
+
+  // debugger;
 
   return (
     <div>

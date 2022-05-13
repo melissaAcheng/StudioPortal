@@ -1,29 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import NoteForm from "./NoteForm";
 
-const EditNote = () => {
+const EditNote = ({ teacher, studentList }) => {
   const [note, setNote] = useState({});
   const [loaded, setLoaded] = useState(false);
   const navigate = useNavigate();
   const { noteId } = useParams();
-  const [teacher, setTeacher] = useState([]);
-  const [studentList, setStudentList] = useState([]);
-
-  useEffect(() => {
-    axios
-      .get("http://localhost:8000/api/teachers", { withCredentials: true })
-      .then((res) => {
-        console.log(res.data);
-        setTeacher(res.data);
-        setStudentList(res.data.students);
-      })
-      .catch((err) => {
-        console.log(err);
-        navigate("/teachers");
-      });
-  }, []);
 
   useEffect(() => {
     axios
@@ -31,6 +15,7 @@ const EditNote = () => {
       .then((res) => {
         console.log(res.data);
         setNote(res.data);
+        // debugger;
         setLoaded(true);
       })
       .catch((err) => {
@@ -52,15 +37,17 @@ const EditNote = () => {
 
   return (
     <div>
-      <NoteForm
-        onSubmitProp={updateNote}
-        initialStudent={note.student}
-        initialDescription={note.description}
-        initialVideo={note.video}
-        initialDate={note.date}
-        studentList={studentList}
-        teacher={teacher}
-      />
+      {loaded && (
+        <NoteForm
+          onSubmitProp={updateNote}
+          initialStudent={note.student}
+          initialDescription={note.description}
+          initialVideo={note.video}
+          initialDate={note.date}
+          studentList={studentList}
+          teacher={teacher}
+        />
+      )}
     </div>
   );
 };
