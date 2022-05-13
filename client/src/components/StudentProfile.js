@@ -3,29 +3,13 @@ import axios from "axios";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { format } from "date-fns";
 import Navbar from "./Navbar";
+import { dateFormatter } from "../utils/dateFormatter";
 
-const StudentProfile = () => {
+const StudentProfile = ({ isTeacherLoggedIn }) => {
   const navigate = useNavigate();
   const [student, setStudent] = useState({});
   const [noteList, setNoteList] = useState([]);
-  const [isTeacherLoggedIn, setIsTeacherLoggedIn] = useState(false);
   let { studentId } = useParams();
-
-  console.log(studentId);
-
-  useEffect(() => {
-    axios
-      .get("http://localhost:8000/api/teachers", { withCredentials: true })
-      .then((res) => {
-        console.log(res.data);
-        if (res.data != null) {
-          setIsTeacherLoggedIn(true);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
 
   useEffect(() => {
     axios
@@ -92,7 +76,7 @@ const StudentProfile = () => {
                   >
                     <td scope="row" className="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
                       <Link to={`/notes/${note._id}`} className="no-underline hover:underline text-blue-500 text-lg">
-                        {note.date}
+                        {dateFormatter(note.date)}
                       </Link>
                     </td>
                     <td scope="row" className="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">

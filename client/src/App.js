@@ -12,6 +12,22 @@ import CreateNote from "./components/CreateNote";
 import EditNote from "./components/EditNote";
 
 function App() {
+  const [isTeacherLoggedIn, setIsTeacherLoggedIn] = useState(false);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8000/api/teachers", { withCredentials: true })
+      .then((res) => {
+        console.log(res.data);
+        if (res.data != null) {
+          setIsTeacherLoggedIn(true);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   return (
     <div className="App">
       <BrowserRouter>
@@ -19,10 +35,10 @@ function App() {
           <Route element={<TeacherLogReg />} path="/teachers" />
           <Route element={<StudentLogReg />} path="/students" />
           <Route element={<TeacherHome />} path="/teachers/home" />
-          <Route element={<StudentProfile />} path="/students/:studentId" />
+          <Route element={<StudentProfile isTeacherLoggedIn={isTeacherLoggedIn} />} path="/students/:studentId" />
           <Route element={<CreateNote />} path="/notes/addNote" />
-          <Route element={<EditNote />} path="/notes/edit/:noteId"/>
-          <Route element={<ViewNote />} path="/notes/:noteId" />
+          <Route element={<EditNote />} path="/notes/edit/:noteId" />
+          <Route element={<ViewNote isTeacherLoggedIn={isTeacherLoggedIn} />} path="/notes/:noteId" />
         </Routes>
       </BrowserRouter>
     </div>

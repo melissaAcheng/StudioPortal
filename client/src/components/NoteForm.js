@@ -12,71 +12,27 @@ const NoteForm = ({
   studentList,
   teacher,
 }) => {
-  // const navigate = useNavigate();
-  // const [teacher, setTeacher] = useState([]);
   const [student, setStudent] = useState(initialStudent);
   const [date, setDate] = useState(initialDate);
   const [description, setDescription] = useState(initialDescription);
   const [video, setVideo] = useState(initialVideo);
 
-  // useEffect(() => {
-  //   axios
-  //     .get("http://localhost:8000/api/teachers", { withCredentials: true })
-  //     .then((res) => {
-  //       console.log(res.data);
-  //       setTeacher(res.data);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //       navigate("/teachers");
-  //     });
-  // }, []);
-
-  // const addNote = (e) => {
-  //   e.preventDefault();
-  //   console.log({
-  //     student,
-  //     date,
-  //     description,
-  //     video,
-  //   });
-  //   axios
-  //     .post(
-  //       "http://localhost:8000/api/notes",
-  //       {
-  //         date,
-  //         description,
-  //         video,
-  //         student,
-  //         createdBy: teacher,
-  //       },
-  //       { withCredentials: true }
-  //     )
-  //     .then((res) => {
-  //       console.log("success", res);
-  //       navigate("/teachers/home");
-  //     })
-  //     .catch((err) => {
-  //       console.log("errors", err);
-  //     });
-  // };
-
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    // debugger;
+    debugger;
     onSubmitProp({
       student: student,
       date: date,
       description: description,
       video: video,
-      createdBy:  teacher ,
+      createdBy: teacher,
     });
   };
 
   return (
     <div>
       <Navbar />
-      <h1 className="font-light leading-tight text-3xl text-black-600 p-3">Add Lesson Note</h1>
+      <h1 className="font-light leading-tight text-3xl text-black-600 p-3">Lesson Note</h1>
       <div className="w-full max-w-md m-auto bg-white rounded-lg border border-primaryBorder shadow-default py-10 px-16">
         <form onSubmit={onSubmitHandler} className="w-full max-w-sm">
           <div className="flex text-left">
@@ -131,7 +87,7 @@ const NoteForm = ({
             <button
               className={`bg-gray-500 py-2 px-4 text-sm text-white rounded border border-green focus:outline-none focus:border-green-dark`}
             >
-              Add
+              Submit
             </button>
           </div>
         </form>

@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
+import { dateFormatter } from "../utils/dateFormatter";
 
-const ViewNote = () => {
+const ViewNote = ({ isTeacherLoggedIn }) => {
   const navigate = useNavigate();
   const [note, setNote] = useState({});
   let { noteId } = useParams();
@@ -20,10 +21,24 @@ const ViewNote = () => {
       });
   }, []);
 
+  const handleDelete = () => {
+    axios
+      .delete(`http://localhost:8000/api/notes/${noteId}`)
+      .then((res) => {
+        console.log(res);
+        navigate(`/students/${note.student}`);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const date = new Date(note.date);
+  const options = { weekday: "long", year: "numeric", month: "short", day: "numeric" };
+  const formattedDate = date.toLocaleDateString("en-us", options);
+
   return (
     <div>
       <Navbar />
-      <h1 className="font-medium leading-tight text-3xl text-black-600 p-3">{note.date}</h1>
+      <h1 className="font-medium leading-tight text-3xl text-black-600 p-3">{dateFormatter(note.date)}</h1>
       <div>
         <table className="w-full mt-5 table-auto flex items-center justify-center text-lg text-left text-black-500 dark:text-black-400">
           <tbody>
@@ -39,9 +54,23 @@ const ViewNote = () => {
         </table>
       </div>
       <div className="mt-10">
-        <Link to={`/students/${note.student}`} className="text-decoration: underline text-blue-500">
-          Back
-        </Link>
+        <div className="mb-5">
+          {isTeacherLoggedIn && (
+            <Link to={`/notes/edit/${note._id}`} className="text-decoration: underline text-blue-500">
+              Edit
+            </Link>
+          )}
+          {isTeacherLoggedIn && (
+            <button onClick={handleDelete} className="bg-red-500 px-4 ml-4 text-white rounded-md">
+              Delete
+            </button>
+          )}
+        </div>
+        <div>
+          <Link to={`/students/${note.student}`} className="text-decoration: underline text-blue-500">
+            Back
+          </Link>
+        </div>
       </div>
     </div>
   );

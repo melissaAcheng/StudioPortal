@@ -78,15 +78,17 @@ const TeacherHome = () => {
       <div>
         <h2 className="font-light leading-tight text-3xl text-black-600 p-3">Students</h2>
         <div className="w-full max-w-md m-auto py-5">
-          {studentList.map((student, index) => {
-            return (
-              <p key={index}>
-                <Link className="no-underline hover:underline text-blue-500 text-lg" to={`/students/${student._id}`}>
-                  {student.firstName} {student.lastName}
-                </Link>
-              </p>
-            );
-          })}
+          {studentList
+            .sort((a, b) => a.lastName.localeCompare(b.lastName))
+            .map((student, index) => {
+              return (
+                <p key={index}>
+                  <Link className="no-underline hover:underline text-blue-500 text-lg" to={`/students/${student._id}`}>
+                    {student.firstName} {student.lastName}
+                  </Link>
+                </p>
+              );
+            })}
         </div>
         {/* Add Student to List */}
         <form onSubmit={addStudent}>
