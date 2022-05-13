@@ -3,14 +3,14 @@ const jwt = require("jsonwebtoken");
 
 module.exports = {
   // queries here
-  createNewNotes: (req, res) => {
+  createNewNote: (req, res) => {
     const newNoteObject = new Notes(req.body);
 
-    const decodedJWT = jwt.decode(req.cookies.teachertoken, {
+    const decodedJWT = jwt.decode(req.cookies.usertoken, {
       complete: true,
     });
 
-    newNoteObject.teacher = decodedJWT.payload.id;
+    newNoteObject.createdBy = decodedJWT.payload.id;
 
     newNoteObject
       .save()
@@ -27,11 +27,12 @@ module.exports = {
   },
   getAllNotes: (req, res) => {
     Notes.find()
-      .populate("teacher", "firstName lastName email")
-      .then((allNotess) => {
+      .populate("createdBy", "firstName lastName email")
+      .populate("student", "firstName lastName email")
+      .then((allNotes) => {
         console.log("getAllNotess success");
-        console.log(allNotess);
-        res.json(allNotess);
+        console.log(allNotes);
+        res.json(allNotes);
       })
       .catch((err) => {
         console.log("getAllNotess failed");
@@ -41,7 +42,8 @@ module.exports = {
   },
   getAllNotesForStudent: (req, res) => {
     Notes.find({ student: req.params.studentId })
-      .populate("student")
+      .populate("createdBy", "firstName lastName email")
+      .populate("student", "firstName lastName email")
       .then((studentNotes) => {
         console.log("getAllNotesForStudent success");
         console.log(studentNotes);
@@ -55,6 +57,7 @@ module.exports = {
   },
   getOneNote: (req, res) => {
     Notes.findOne({ _id: req.params.id })
+      .populate("createdBy", "firstName lastName email")
       .then((oneNotes) => {
         console.log("getOneNotes success");
         console.log(oneNotes);
@@ -66,28 +69,28 @@ module.exports = {
         res.status(400).json(err);
       });
   },
-  updateOneNotes: (req, res) => {
+  updateOneNote: (req, res) => {
     Notes.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true, runValidators: true })
-      .then((updatedNotes) => {
-        console.log("updateOneNotes success");
-        console.log(updatedNotes);
-        res.json(updatedNotes);
+      .then((updatedNote) => {
+        console.log("updateOneNote success");
+        console.log(updatedNote);
+        res.json(updatedNote);
       })
       .catch((err) => {
-        console.log("updateNotes failed");
+        console.log("updateNote failed");
         console.log(err);
         res.status(400).json(err);
       });
   },
-  deleteOneNotes: (req, res) => {
+  deleteOneNote: (req, res) => {
     Notes.deleteOne({ _id: req.params.id })
-      .then((deletedNotes) => {
-        console.log("deleteOneNotes success");
-        console.log(deletedNotes);
-        res.json(deletedNotes);
+      .then((deletedNote) => {
+        console.log("deleteOneNote success");
+        console.log(deletedNote);
+        res.json(deletedNote);
       })
       .catch((err) => {
-        console.log("deleteOneNotes failed");
+        console.log("deleteOneNote failed");
         console.log(err);
         res.json(err);
       });

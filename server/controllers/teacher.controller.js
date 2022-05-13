@@ -44,6 +44,7 @@ module.exports = {
                         email: teacherRecord.email,
                         firstName: teacherRecord.firstName,
                         lastName: teacherRecord.lastName,
+                        students: teacherRecord.students,
                       },
                       process.env.JWT_SECRET
                     ),
@@ -75,7 +76,7 @@ module.exports = {
       });
   },
 
-  logoutTeacher: (req, res) => {
+  logoutUser: (req, res) => {
     console.log("logging out");
     res.clearCookie("usertoken");
     res.json({
@@ -87,9 +88,12 @@ module.exports = {
     const decodedJWT = jwt.decode(req.cookies.usertoken, {
       complete: true,
     });
+
     Teacher.findOne({
+      // _id: req.jwtpayload.id,
       _id: decodedJWT.payload.id,
     })
+      .populate("students", "firstName lastName")
       .then((teacher) => {
         console.log(teacher);
         res.json(teacher);
@@ -156,7 +160,10 @@ module.exports = {
   //     });
   // },
   updateOneTeacher: (req, res) => {
-    Teacher.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true, runValidators: true })
+    const decodedJWT = jwt.decode(req.cookies.usertoken, {
+      complete: true,
+    });
+    Teacher.findOneAndUpdate({ _id: decodedJWT.payload.id }, req.body, { new: true, runValidators: true })
       .then((updatedTeacher) => {
         console.log("updateOneTeacher success");
         console.log(updatedTeacher);

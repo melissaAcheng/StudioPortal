@@ -52,7 +52,7 @@ module.exports = {
                   )
                   .json({
                     message: "Successful Student Login",
-                    studentLoggedIn: studentRecord.email,
+                    studentLoggedIn: studentRecord._id,
                   });
               } else {
                 res.status(400).json({
@@ -72,13 +72,13 @@ module.exports = {
       });
   },
 
-  logoutStudent: (req, res) => {
-    console.log("logging out");
-    res.clearCookie("usertoken");
-    res.json({
-      message: "You have successfully logged out",
-    });
-  },
+  // logoutStudent: (req, res) => {
+  //   console.log("logging out");
+  //   res.clearCookie("usertoken");
+  //   res.json({
+  //     message: "You have successfully logged out",
+  //   });
+  // },
 
   getLoggedInStudent: (req, res) => {
     const decodedJWT = jwt.decode(req.cookies.usertoken, {
@@ -95,20 +95,6 @@ module.exports = {
         console.log(err);
       });
   },
-
-  // createNewStudent: (req, res) => {
-  //   Student.create(req.body)
-  //     .then((newStudent) => {
-  //       console.log("createNewStudent success");
-  //       console.log(newStudent);
-  //       res.json(newStudent);
-  //     })
-  //     .catch((err) => {
-  //       console.log("createNewStudent failed");
-  //       console.log(err);
-  //       res.status(400).json(err);
-  //     });
-  // },
   getAllStudents: (req, res) => {
     Student.find()
       .then((allStudents) => {
@@ -122,20 +108,20 @@ module.exports = {
         res.json(err);
       });
   },
-  getAllStudentsWithTeacher: (req, res) => {
-    Student.find({ teacher: req.params.teacherId })
-      .populate("teacher")
-      .then((studentsWithTeacher) => {
-        console.log("getAllStudentsWithTeacher success");
-        console.log(studentsWithTeacher);
-        res.json(studentsWithTeacher);
-      })
-      .catch((err) => {
-        console.log("getAllStudentsWithTeacher failed");
-        console.log(err);
-        res.json(err);
-      });
-  },
+  // getAllStudentsWithTeacher: (req, res) => {
+  //   Student.find({ teacher: req.params.teacherId })
+  //     .populate("teacher")
+  //     .then((studentsWithTeacher) => {
+  //       console.log("getAllStudentsWithTeacher success");
+  //       console.log(studentsWithTeacher);
+  //       res.json(studentsWithTeacher);
+  //     })
+  //     .catch((err) => {
+  //       console.log("getAllStudentsWithTeacher failed");
+  //       console.log(err);
+  //       res.json(err);
+  //     });
+  // },
   getOneStudent: (req, res) => {
     Student.findOne({ _id: req.params.id })
       .then((oneStudent) => {

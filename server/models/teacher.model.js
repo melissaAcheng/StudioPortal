@@ -24,7 +24,12 @@ const TeacherSchema = new mongoose.Schema(
       required: [true, "Password is required"],
       minLength: [8, "Password must be at least 8 characters"],
     },
-    students: [],
+    students: [
+      {
+        type: mongoose.Schema.ObjectId,
+        ref: "Student",
+      },
+    ],
   },
   { timestamps: true }
 );

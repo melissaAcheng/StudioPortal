@@ -2,10 +2,10 @@ const mongoose = require("mongoose");
 
 const NotesSchema = new mongoose.Schema(
   {
-    // date: {
-    //   type: Date,
-    //   required: [true, "Date is required"],
-    // },
+    date: {
+      type: Date,
+      required: [true, "Date is required"],
+    },
     description: {
       type: String,
       required: [true, "Assignments are required"],
@@ -15,9 +15,10 @@ const NotesSchema = new mongoose.Schema(
     },
     student: {
       type: mongoose.Schema.Types.ObjectId,
+      // type: String,
       ref: "Student",
     },
-    teacher: {
+    createdBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Teacher",
     },
