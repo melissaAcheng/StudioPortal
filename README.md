@@ -9,8 +9,9 @@ GitHub Repo Link: https://github.com/melissaAcheng/StudioPortal
 Project Description: A portal for private music teachers to write lesson notes/homework per student. Students can then log in and view notes.
 
 New Programming Concept(s) I'm Planning to Learn: 
-Creating Registration and Login in MERN
-One-To-Many relationships using MongoDb and Mongoose
+- Creating Registration and Login in MERN
+- One-To-Many relationships using MongoDb and Mongoose
+- Use Tailwind CSS
 
 Week 1 Features (to show at Review during Week 2)
 - Teacher and Student registration and login page with validations
