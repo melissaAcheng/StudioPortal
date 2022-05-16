@@ -24,17 +24,6 @@ const StudentSchema = new mongoose.Schema(
       required: [true, "Password is required"],
       minLength: [8, "Password must be at least 8 characters"],
     },
-    // I don't think I need to include this field, since I'm adding students through the teacher account
-    teacher: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Teacher",
-    },
-    notes: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Note",
-      },
-    ],
   },
   { timestamps: true }
 );

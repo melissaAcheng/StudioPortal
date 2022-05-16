@@ -17,13 +17,23 @@ const NoteForm = ({
   const [description, setDescription] = useState(initialDescription);
   const [video, setVideo] = useState(initialVideo);
 
+  const matchYoutubeUrl = (url) => {
+    let regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+    let match = url.match(regExp);
+    if (match && match[2].length == 11) {
+      return match[2];
+    } else {
+      return "Video not found";
+    }
+  };
+
   const onSubmitHandler = (e) => {
     e.preventDefault();
     onSubmitProp({
       student: student,
       date: date,
       description: description,
-      video: video,
+      video: matchYoutubeUrl(video),
       createdBy: teacher,
     });
   };
@@ -75,7 +85,7 @@ const NoteForm = ({
             ></textarea>
           </div>
           <div className="flex text-left">
-            <label>Video URL:</label>
+            <label>YouTube URL:</label>
             <input
               type="text"
               name="video"

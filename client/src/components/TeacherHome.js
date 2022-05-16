@@ -3,12 +3,30 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Navbar from "./Navbar";
 
-const TeacherHome = ({ teacher, studentList, setStudentList }) => {
+const TeacherHome = () => {
   const navigate = useNavigate();
   // State to hold new student
   const [student, setStudent] = useState("");
   // List of all students
   const [allStudents, setAllStudents] = useState([]);
+
+  const [teacher, setTeacher] = useState([]);
+  const [studentList, setStudentList] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8000/api/teachers", { withCredentials: true })
+      .then((res) => {
+        console.log(res.data);
+        if (res.data != null) {
+          setTeacher(res.data);
+          setStudentList(res.data.students);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   useEffect(() => {
     axios
@@ -25,8 +43,6 @@ const TeacherHome = ({ teacher, studentList, setStudentList }) => {
   const addStudent = (e) => {
     e.preventDefault();
     console.log(student);
-    console.log("huh");
-    debugger;
     axios
       .put(
         "http://localhost:8000/api/teachers",

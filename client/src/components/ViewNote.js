@@ -9,6 +9,8 @@ const ViewNote = ({ isTeacherLoggedIn }) => {
   const [note, setNote] = useState({});
   let { noteId } = useParams();
 
+  // debugger;
+
   useEffect(() => {
     axios
       .get(`http://localhost:8000/api/notes/${noteId}`)
@@ -31,10 +33,6 @@ const ViewNote = ({ isTeacherLoggedIn }) => {
       .catch((err) => console.log(err));
   };
 
-  const date = new Date(note.date);
-  const options = { weekday: "long", year: "numeric", month: "short", day: "numeric" };
-  const formattedDate = date.toLocaleDateString("en-us", options);
-
   return (
     <div>
       <Navbar />
@@ -48,7 +46,20 @@ const ViewNote = ({ isTeacherLoggedIn }) => {
             </tr>
             <tr>
               <th className="text-md text-black-700 uppercase dark:text-black-400">Video</th>
-              <td className="px-6 py-3">{note.video}</td>
+              <td className="px-6 py-3">
+                <iframe
+                  width="560"
+                  height="315"
+                  src={`https://www.youtube.com/embed/${note.video}`}
+                  title="YouTube video player"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen
+                ></iframe>
+                {/* <a href={`${note.video}`} target="_blank">
+                  {note.video}
+                </a> */}
+              </td>
             </tr>
           </tbody>
         </table>

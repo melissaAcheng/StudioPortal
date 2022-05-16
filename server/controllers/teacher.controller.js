@@ -90,7 +90,6 @@ module.exports = {
     });
 
     Teacher.findOne({
-      // _id: req.jwtpayload.id,
       _id: decodedJWT.payload.id,
     })
       .populate("students", "firstName lastName")
@@ -102,20 +101,6 @@ module.exports = {
         console.log(err);
       });
   },
-
-  // createNewTeacher: (req, res) => {
-  //   Teacher.create(req.body)
-  //     .then((newTeacher) => {
-  //       console.log("createNewTeacher success");
-  //       console.log(newTeacher);
-  //       res.json(newTeacher);
-  //     })
-  //     .catch((err) => {
-  //       console.log("createNewTeacher failed");
-  //       console.log(err);
-  //       res.status(400).json(err);
-  //     });
-  // },
   getAllTeachers: (req, res) => {
     Teacher.find()
       .then((allTeachers) => {
@@ -142,23 +127,6 @@ module.exports = {
         res.status(400).json(err);
       });
   },
-  // get list of all students associated with teacher
-  // find One Teacher, list all students under teacher
-  // getStudents: (req, res) => {
-  //   Teacher.findOne({ _id: req.params.id })
-  //     .populate("students")
-  //     .exec()
-  //     .then((teacherStudents) => {
-  //       console.log("getStudents success");
-  //       console.log(teacherStudents);
-  //       res.json(teacherStudents);
-  //     })
-  //     .catch((err) => {
-  //       console.log("getStudents failed");
-  //       console.log(err);
-  //       res.json(err);
-  //     });
-  // },
   updateOneTeacher: (req, res) => {
     const decodedJWT = jwt.decode(req.cookies.usertoken, {
       complete: true,

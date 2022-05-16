@@ -37,7 +37,7 @@ function App() {
         <Routes>
           <Route element={<TeacherLogReg />} path="/teachers" />
           <Route element={<StudentLogReg />} path="/students" />
-          <Route element={<TeacherHome teacher={teacher} studentList={studentList} setStudentList={setStudentList}/>} path="/teachers/home" />
+          <Route element={<TeacherHome />} path="/teachers/home" />
           <Route element={<StudentProfile isTeacherLoggedIn={isTeacherLoggedIn} />} path="/students/:studentId" />
           <Route element={<CreateNote teacher={teacher} studentList={studentList} />} path="/notes/addNote" />
           <Route element={<EditNote teacher={teacher} studentList={studentList} />} path="/notes/edit/:noteId" />

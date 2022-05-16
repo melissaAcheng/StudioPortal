@@ -3,6 +3,8 @@ const express = require("express");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const port = process.env.MY_PORT;
+const apiKey = process.env.API_KEY;
+const baseApiUrl = "https://www.googleapis.com/youtube/v3"
 
 const app = express();
 
