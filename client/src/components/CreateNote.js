@@ -3,7 +3,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import NoteForm from "./NoteForm";
 
-const CreateNote = ({ teacher, studentList, isTeacherLoggedIn }) => {
+const CreateNote = ({ teacher, studentList }) => {
+  const [isTeacherLoggedIn, setIsTeacherLoggedIn] = useState(false);
   const navigate = useNavigate();
   const [date, setDate] = useState("");
   const [description, setDescription] = useState("");
@@ -11,9 +12,18 @@ const CreateNote = ({ teacher, studentList, isTeacherLoggedIn }) => {
   const [student, setStudent] = useState();
 
   useEffect(() => {
-    if (!isTeacherLoggedIn) {
-      navigate("/teachers");
-    }
+    axios
+      .get("http://localhost:8000/api/teachers", { withCredentials: true })
+      .then((res) => {
+        console.log(res.data);
+        if (res.data != null) {
+          setIsTeacherLoggedIn(true);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        navigate("/teachers");
+      });
   }, []);
 
   const addNote = (noteParam) => {
