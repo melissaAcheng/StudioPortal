@@ -38,8 +38,6 @@ const NoteForm = ({
     });
   };
 
-  // debugger;
-
   return (
     <div>
       <Navbar />

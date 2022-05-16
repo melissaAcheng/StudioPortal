@@ -39,8 +39,14 @@ function App() {
           <Route element={<StudentLogReg />} path="/students" />
           <Route element={<TeacherHome />} path="/teachers/home" />
           <Route element={<StudentProfile isTeacherLoggedIn={isTeacherLoggedIn} />} path="/students/:studentId" />
-          <Route element={<CreateNote teacher={teacher} studentList={studentList} />} path="/notes/addNote" />
-          <Route element={<EditNote teacher={teacher} studentList={studentList} />} path="/notes/edit/:noteId" />
+          <Route
+            element={<CreateNote teacher={teacher} studentList={studentList} isTeacherLoggedIn={isTeacherLoggedIn} />}
+            path="/notes/addNote"
+          />
+          <Route
+            element={<EditNote teacher={teacher} studentList={studentList} isTeacherLoggedIn={isTeacherLoggedIn} />}
+            path="/notes/edit/:noteId"
+          />
           <Route element={<ViewNote isTeacherLoggedIn={isTeacherLoggedIn} />} path="/notes/:noteId" />
         </Routes>
       </BrowserRouter>

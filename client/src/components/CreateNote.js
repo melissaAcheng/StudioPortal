@@ -3,12 +3,18 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import NoteForm from "./NoteForm";
 
-const CreateNote = ({ teacher, studentList }) => {
+const CreateNote = ({ teacher, studentList, isTeacherLoggedIn }) => {
   const navigate = useNavigate();
   const [date, setDate] = useState("");
   const [description, setDescription] = useState("");
   const [video, setVideo] = useState("");
   const [student, setStudent] = useState();
+
+  useEffect(() => {
+    if (!isTeacherLoggedIn) {
+      navigate("/teachers");
+    }
+  }, []);
 
   const addNote = (noteParam) => {
     console.log({

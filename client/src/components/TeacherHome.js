@@ -25,6 +25,7 @@ const TeacherHome = () => {
       })
       .catch((err) => {
         console.log(err);
+        navigate("/teachers");
       });
   }, []);
 
