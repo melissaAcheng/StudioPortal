@@ -56,9 +56,6 @@ const ViewNote = ({ isTeacherLoggedIn }) => {
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowfullscreen
                 ></iframe>
-                {/* <a href={`${note.video}`} target="_blank">
-                  {note.video}
-                </a> */}
               </td>
             </tr>
           </tbody>
