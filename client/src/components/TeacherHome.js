@@ -15,7 +15,7 @@ const TeacherHome = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/teachers", { withCredentials: true })
+      .get("http://localhost:8000/api/users", { withCredentials: true })
       .then((res) => {
         console.log(res.data);
         if (res.data != null) {
@@ -31,7 +31,7 @@ const TeacherHome = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/students/all")
+      .get("http://localhost:8000/api/users/students")
       .then((res) => {
         console.log(res.data);
         setAllStudents(res.data);
@@ -46,7 +46,7 @@ const TeacherHome = () => {
     console.log(student);
     axios
       .put(
-        "http://localhost:8000/api/teachers",
+        `http://localhost:8000/api/users/${teacher._id}`,
         {
           students: [...studentList, student],
         },

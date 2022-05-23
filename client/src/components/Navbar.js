@@ -4,16 +4,16 @@ import { Link, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const [user, setUser] = useState([]);
   const [isTeacherLoggedIn, setIsTeacherLoggedIn] = useState(false);
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/teachers", { withCredentials: true })
+      .get("http://localhost:8000/api/users", { withCredentials: true })
       .then((res) => {
         console.log(res.data);
-        if (res.data != null) {
-          setIsTeacherLoggedIn(true);
-        }
+        setUser(res.data);
+        if (res.data.role === "teacher") setIsTeacherLoggedIn(true);
       })
       .catch((err) => {
         console.log(err);
@@ -23,10 +23,10 @@ const Navbar = () => {
   const logout = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:8000/api/logout", {}, { withCredentials: true })
+      .post("http://localhost:8000/api/users/logout", {}, { withCredentials: true })
       .then((res) => {
         console.log(res.data);
-        isTeacherLoggedIn ? navigate("/teachers") : navigate("/students");
+        navigate("/");
       })
       .catch((err) => {
         console.log(err);

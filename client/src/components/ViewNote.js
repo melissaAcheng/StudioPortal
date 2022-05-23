@@ -4,12 +4,13 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
 import { dateFormatter } from "../utils/dateFormatter";
 
-const ViewNote = ({ isTeacherLoggedIn }) => {
+const ViewNote = ({ loggedInUser }) => {
   const navigate = useNavigate();
   const [note, setNote] = useState({});
   let { noteId } = useParams();
 
   // debugger;
+  console.log(loggedInUser);
 
   useEffect(() => {
     axios
@@ -63,12 +64,12 @@ const ViewNote = ({ isTeacherLoggedIn }) => {
       </div>
       <div className="mt-10">
         <div className="mb-5">
-          {isTeacherLoggedIn && (
+          {loggedInUser.role === "teacher" && (
             <Link to={`/notes/edit/${note._id}`} className="text-decoration: underline text-blue-500">
               Edit
             </Link>
           )}
-          {isTeacherLoggedIn && (
+          {loggedInUser.role === "teacher" && (
             <button onClick={handleDelete} className="bg-red-500 px-4 ml-4 text-white rounded-md">
               Delete
             </button>

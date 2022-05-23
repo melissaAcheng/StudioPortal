@@ -1,4 +1,4 @@
-                const mongoose = require("mongoose");
+const mongoose = require("mongoose");
 
 const NotesSchema = new mongoose.Schema(
   {
@@ -16,11 +16,11 @@ const NotesSchema = new mongoose.Schema(
     student: {
       type: mongoose.Schema.Types.ObjectId,
       // type: String,
-      ref: "Student",
+      ref: "User",
     },
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Teacher",
+      ref: "User",
     },
   },
   { timestamps: true }

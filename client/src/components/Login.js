@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const StudentLogin = () => {
+const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // const [id, setId] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
@@ -13,7 +12,7 @@ const StudentLogin = () => {
     e.preventDefault();
     axios
       .post(
-        "http://localhost:8000/api/students/login",
+        "http://localhost:8000/api/users/login",
         {
           email: email,
           password: password,
@@ -24,8 +23,13 @@ const StudentLogin = () => {
       )
       .then((res) => {
         console.log(res.data);
-        console.log(res.data.studentLoggedIn);
-        navigate(`/students/${res.data.studentLoggedIn}`);
+        // If user has a role of teacher -> navigate to view all teacher home page
+        // If user has a role of student -> navigate to student profile page
+        if (res.data.userRole === "teacher") {
+          navigate("/teachers/home");
+        } else {
+          navigate(`/students/${res.data.userId}`);
+        }
       })
       .catch((err) => {
         console.log(err.response.data);
@@ -36,7 +40,7 @@ const StudentLogin = () => {
   return (
     <div className="mr-5">
       <div className="w-full max-w-md m-auto bg-white rounded-lg border border-primaryBorder shadow-default py-10 px-16">
-        <h1 className="text-2xl font-medium text-primary mt-4 mb-12 text-center">Student Login</h1>
+        <h1 className="text-2xl font-medium text-primary mt-4 mb-12 text-center">Login</h1>
         <form onSubmit={login}>
           <div>
             <label>Email</label>
@@ -74,4 +78,4 @@ const StudentLogin = () => {
   );
 };
 
-export default StudentLogin;
+export default Login;
