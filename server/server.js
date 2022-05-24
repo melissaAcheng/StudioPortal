@@ -4,8 +4,8 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 
 const port = process.env.MY_PORT;
-const apiKey = process.env.API_KEY;
-const baseApiUrl = "https://www.googleapis.com/youtube/v3";
+// const apiKey = process.env.API_KEY;
+// const baseApiUrl = "https://www.googleapis.com/youtube/v3";
 
 const app = express();
 
@@ -19,8 +19,6 @@ app.use(
 );
 app.use(cookieParser());
 
-// require("./routes/teacher.routes")(app);
-// require("./routes/student.routes")(app);
 require("./routes/notes.routes")(app);
 require("./routes/user.routes")(app);
 
