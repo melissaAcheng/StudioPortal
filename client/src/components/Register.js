@@ -42,7 +42,11 @@ const Register = () => {
         });
         // setConfirmReg("Thank you for registering. Please log in with your credentials");
         setErrors({});
-        navigate("/home");
+        if (res.data.userRole === "teacher") {
+          navigate("/teachers/home");
+        } else {
+          navigate(`/students/${res.data.user._id}`);
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -65,8 +69,8 @@ const Register = () => {
               className="text-black border font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center mb-2"
             >
               <option>Please select an option</option>
-              <option>Teacher</option>
-              <option>Student</option>
+              <option>teacher</option>
+              <option>student</option>
             </select>
           </div>
           <div>

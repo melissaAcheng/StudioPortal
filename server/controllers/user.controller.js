@@ -19,7 +19,7 @@ module.exports = {
           })
           .json({ msg: "success!", user: user });
       })
-      .catch((err) => res.json(err));
+      .catch((err) => res.status(400).json(err));
   },
 
   loginUser: async (req, res) => {
