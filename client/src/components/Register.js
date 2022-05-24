@@ -1,21 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-const TeacherReg = () => {
+const Register = () => {
+  const navigate = useNavigate();
   const [confirmReg, setConfirmReg] = useState("");
   const [errors, setErrors] = useState({});
 
-  const [teacher, setTeacher] = useState({
+  const [user, setUser] = useState({
     firstName: "",
     lastName: "",
     email: "",
     password: "",
     confirmPassword: "",
+    role: "",
   });
 
   const handleChange = (e) => {
-    setTeacher({
-      ...teacher,
+    setUser({
+      ...user,
       [e.target.name]: e.target.value,
     });
   };
@@ -24,20 +27,26 @@ const TeacherReg = () => {
     e.preventDefault();
 
     axios
-      .post("http://localhost:8000/api/teachers/register", teacher, {
+      .post("http://localhost:8000/api/users/register", user, {
         withCredentials: true,
       })
       .then((res) => {
         console.log(res.data);
-        setTeacher({
+        setUser({
           firstName: "",
           lastName: "",
           email: "",
           password: "",
           confirmPassword: "",
+          role: "",
         });
-        setConfirmReg("Thank you for registering. Please log in with your credentials");
+        // setConfirmReg("Thank you for registering. Please log in with your credentials");
         setErrors({});
+        if (res.data.userRole === "teacher") {
+          navigate("/teachers/home");
+        } else {
+          navigate(`/students/${res.data.user._id}`);
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -48,16 +57,29 @@ const TeacherReg = () => {
   return (
     <div className="ml-5">
       <div className="w-full max-w-md m-auto bg-white rounded-lg border border-primaryBorder shadow-default py-10 px-16">
-        <h1 className="text-2xl font-medium text-primary mt-4 mb-12 text-center">Teacher Registration</h1>
+        <h1 className="text-2xl font-medium text-primary mt-4 mb-12 text-center">Register</h1>
         {confirmReg ? <h4>{confirmReg}</h4> : null}
         <form onSubmit={register}>
+          <div>
+            {errors.role ? <p className="text-red-400">{errors.role.message}</p> : null}
+            <select
+              name="role"
+              value={user.role}
+              onChange={(e) => handleChange(e)}
+              className="text-black border font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center mb-2"
+            >
+              <option>Please select an option</option>
+              <option>teacher</option>
+              <option>student</option>
+            </select>
+          </div>
           <div>
             <label>First Name</label>
             {errors.firstName ? <p className="text-red-400">{errors.firstName.message}</p> : null}
             <input
               type="text"
               name="firstName"
-              value={teacher.firstName}
+              value={user.firstName}
               onChange={(e) => handleChange(e)}
               className={`w-full p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4`}
               placeholder="First Name"
@@ -69,7 +91,7 @@ const TeacherReg = () => {
             <input
               type="text"
               name="lastName"
-              value={teacher.lastName}
+              value={user.lastName}
               onChange={(e) => handleChange(e)}
               className={`w-full p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4`}
               placeholder="Last Name"
@@ -81,7 +103,7 @@ const TeacherReg = () => {
             <input
               type="text"
               name="email"
-              value={teacher.email}
+              value={user.email}
               onChange={(e) => handleChange(e)}
               className={`w-full p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4`}
               placeholder="Email"
@@ -93,7 +115,7 @@ const TeacherReg = () => {
             <input
               type="password"
               name="password"
-              value={teacher.password}
+              value={user.password}
               onChange={(e) => handleChange(e)}
               className={`w-full p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4`}
               placeholder="Password"
@@ -105,7 +127,7 @@ const TeacherReg = () => {
             <input
               type="password"
               name="confirmPassword"
-              value={teacher.confirmPassword}
+              value={user.confirmPassword}
               onChange={(e) => handleChange(e)}
               className={`w-full p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4`}
               placeholder="Confirm Password"
@@ -124,4 +146,4 @@ const TeacherReg = () => {
   );
 };
 
-export default TeacherReg;
+export default Register;

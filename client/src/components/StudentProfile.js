@@ -5,15 +5,17 @@ import { format } from "date-fns";
 import Navbar from "./Navbar";
 import { dateFormatter } from "../utils/dateFormatter";
 
-const StudentProfile = ({ isTeacherLoggedIn }) => {
+const StudentProfile = () => {
   const navigate = useNavigate();
   const [student, setStudent] = useState({});
   const [noteList, setNoteList] = useState([]);
   let { studentId } = useParams();
 
+  
+
   useEffect(() => {
     axios
-      .get(`http://localhost:8000/api/students/${studentId}`)
+      .get(`http://localhost:8000/api/users/${studentId}`)
       .then((res) => {
         console.log(res.data);
         setStudent(res.data);
@@ -34,19 +36,6 @@ const StudentProfile = ({ isTeacherLoggedIn }) => {
         console.log(err);
       });
   }, []);
-
-  const logout = (e) => {
-    e.preventDefault();
-    axios
-      .post("http://localhost:8000/api/logout", {}, { withCredentials: true })
-      .then((res) => {
-        console.log(res.data);
-        isTeacherLoggedIn ? navigate("/teachers") : navigate("/students");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
 
   return (
     <div>
@@ -88,13 +77,13 @@ const StudentProfile = ({ isTeacherLoggedIn }) => {
           </tbody>
         </table>
       </div>
-      <div className="mt-10">
+      {/* <div className="mt-10">
         {isTeacherLoggedIn && (
           <Link to={"/teachers/home"} className="text-decoration: underline text-blue-500">
             Back
           </Link>
         )}
-      </div>
+      </div> */}
     </div>
   );
 };

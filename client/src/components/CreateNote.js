@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import NoteForm from "./NoteForm";
 
-const CreateNote = ({ teacher, studentList }) => {
+const CreateNote = ({ loggedInUser, studentList }) => {
   const [isTeacherLoggedIn, setIsTeacherLoggedIn] = useState(false);
   const navigate = useNavigate();
   const [date, setDate] = useState("");
@@ -11,20 +11,20 @@ const CreateNote = ({ teacher, studentList }) => {
   const [video, setVideo] = useState("");
   const [student, setStudent] = useState();
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:8000/api/teachers", { withCredentials: true })
-      .then((res) => {
-        console.log(res.data);
-        if (res.data != null) {
-          setIsTeacherLoggedIn(true);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        navigate("/teachers");
-      });
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get("http://localhost:8000/api/users", { withCredentials: true })
+  //     .then((res) => {
+  //       console.log(res.data);
+  //       if (res.data != null) {
+  //         setIsTeacherLoggedIn(true);
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //       navigate("/");
+  //     });
+  // }, []);
 
   const addNote = (noteParam) => {
     console.log({
@@ -56,7 +56,7 @@ const CreateNote = ({ teacher, studentList }) => {
         initialVideo=""
         initialDate=""
         studentList={studentList}
-        teacher={teacher}
+        teacher={loggedInUser}
       />
     </div>
   );
