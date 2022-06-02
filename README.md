@@ -31,3 +31,5 @@ Product Backlog (If I have more time after completing my MVP, I'll start to work
 - Practice log for students to keep track of when they practiced
 
 ![logreg](https://github.com/melissaAcheng/StudioPortal/blob/60d4659a095dcfd38a41c780769f3da9e299d04e/client/src/imgs/img1.png)
+![logreg](https://github.com/melissaAcheng/StudioPortal/blob/60d4659a095dcfd38a41c780769f3da9e299d04e/client/src/imgs/img2.png)
+![logreg](https://github.com/melissaAcheng/StudioPortal/blob/60d4659a095dcfd38a41c780769f3da9e299d04e/client/src/imgs/img3.png)
