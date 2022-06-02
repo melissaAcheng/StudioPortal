@@ -12,7 +12,7 @@ const ViewNote = ({ loggedInUser }) => {
 
   // debugger;
   console.log("USER", loggedInUser);
-  console.log("NOTE", note.createdBy ? note.createdBy._id : "");
+  console.log("NOTE", note);
 
   useEffect(() => {
     axios
