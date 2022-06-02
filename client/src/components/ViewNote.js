@@ -7,10 +7,12 @@ import { dateFormatter } from "../utils/dateFormatter";
 const ViewNote = ({ loggedInUser }) => {
   const navigate = useNavigate();
   const [note, setNote] = useState({});
+  const [createdBy, setCreatedBy] = useState({});
   let { noteId } = useParams();
 
   // debugger;
-  console.log(loggedInUser);
+  console.log("USER", loggedInUser);
+  console.log("NOTE", note.createdBy ? note.createdBy._id : "");
 
   useEffect(() => {
     axios
@@ -18,6 +20,7 @@ const ViewNote = ({ loggedInUser }) => {
       .then((res) => {
         console.log(res.data);
         setNote(res.data);
+        setCreatedBy(res.data.createdBy);
       })
       .catch((err) => {
         console.log(err);
@@ -64,12 +67,12 @@ const ViewNote = ({ loggedInUser }) => {
       </div>
       <div className="mt-10">
         <div className="mb-5">
-          {loggedInUser.role === "teacher" && (
+          {loggedInUser._id === createdBy._id && (
             <Link to={`/notes/edit/${note._id}`} className="text-decoration: underline text-blue-500">
               Edit
             </Link>
           )}
-          {loggedInUser.role === "teacher" && (
+          {loggedInUser._id === createdBy._id && (
             <button onClick={handleDelete} className="bg-red-500 px-4 ml-4 text-white rounded-md">
               Delete
             </button>

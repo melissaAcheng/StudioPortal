@@ -8,6 +8,7 @@ const EditNote = ({ loggedInUser, studentList }) => {
   const [loaded, setLoaded] = useState(false);
   const navigate = useNavigate();
   const { noteId } = useParams();
+  const [errors, setErrors] = useState({});
 
   const dateInput = (date) => {
     let yourDate = new Date(date);
@@ -36,10 +37,12 @@ const EditNote = ({ loggedInUser, studentList }) => {
       .put(`http://localhost:8000/api/notes/${noteId}`, noteParam)
       .then((res) => {
         console.log(res.data);
+        setErrors({});
         navigate(`/students/${note.student}`);
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err.response.data.errors);
+        setErrors(err.response.data.errors);
       });
   };
 
@@ -54,6 +57,7 @@ const EditNote = ({ loggedInUser, studentList }) => {
           initialDate={dateInput(note.date)}
           studentList={studentList}
           teacher={loggedInUser}
+          errors={errors}
         />
       )}
     </div>

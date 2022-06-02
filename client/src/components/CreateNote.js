@@ -10,6 +10,7 @@ const CreateNote = ({ loggedInUser, studentList }) => {
   const [description, setDescription] = useState("");
   const [video, setVideo] = useState("");
   const [student, setStudent] = useState();
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
     axios
@@ -37,10 +38,12 @@ const CreateNote = ({ loggedInUser, studentList }) => {
       )
       .then((res) => {
         console.log("success", res);
+        setErrors({});
         navigate("/teachers/home");
       })
       .catch((err) => {
-        console.log("errors", err);
+        console.log("errors", err.response.data.errors);
+        setErrors(err.response.data.errors);
       });
   };
 
@@ -54,6 +57,7 @@ const CreateNote = ({ loggedInUser, studentList }) => {
         initialDate=""
         studentList={studentList}
         teacher={loggedInUser}
+        errors={errors}
       />
     </div>
   );

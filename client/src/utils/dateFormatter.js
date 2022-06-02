@@ -1,6 +1,6 @@
 const dateFormatter = (date) => {
   let d = new Date(date);
-  const days = ["Sunday", "Monday", "Tuesday", "Wednewday", "Thursday", "Friday", "Saturday"];
+  const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
   const months = [
     "January",
     "February",

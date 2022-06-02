@@ -11,6 +11,7 @@ const NoteForm = ({
   initialVideo,
   studentList,
   teacher,
+  errors,
 }) => {
   const [student, setStudent] = useState(initialStudent);
   const [date, setDate] = useState(initialDate);
@@ -44,6 +45,7 @@ const NoteForm = ({
       <h1 className="font-light leading-tight text-3xl text-black-600 p-3">Lesson Note</h1>
       <div className="w-full max-w-md m-auto bg-white rounded-lg border border-primaryBorder shadow-default py-10 px-16">
         <form onSubmit={onSubmitHandler} className="w-full max-w-sm">
+          {errors.student ? <p className="text-red-400">Please select a student</p> : null}
           <div className="flex text-left">
             <label>Student:</label>
             <select
@@ -62,6 +64,7 @@ const NoteForm = ({
               })}
             </select>
           </div>
+          {errors.date ? <p className="text-red-400">{errors.date.message}</p> : null}
           <div className="flex text-left">
             <label>Date:</label>
             <input
@@ -72,6 +75,7 @@ const NoteForm = ({
               className={`w-full p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4`}
             ></input>
           </div>
+          {errors.description ? <p className="text-red-400">{errors.description.message}</p> : null}
           <div className="flex text-left">
             <label>Description:</label>
             <textarea

@@ -5,6 +5,8 @@ const NotesSchema = new mongoose.Schema(
     date: {
       type: Date,
       required: [true, "Date is required"],
+      // min: "1990-01-01",
+      // max: [new Date().getDate(), "Date cannot be in the future"],
     },
     description: {
       type: String,
