@@ -30,4 +30,4 @@ Product Backlog (If I have more time after completing my MVP, I'll start to work
 - Student can add comments to lesson notes
 - Practice log for students to keep track of when they practiced
 
-(client/imgs/img1)
+![logreg](https://github.com/melissaAcheng/StudioPortal/blob/60d4659a095dcfd38a41c780769f3da9e299d04e/client/src/imgs/img1.png)
