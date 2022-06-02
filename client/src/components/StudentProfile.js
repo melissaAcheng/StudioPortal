@@ -11,13 +11,12 @@ const StudentProfile = () => {
   const [noteList, setNoteList] = useState([]);
   let { studentId } = useParams();
 
-  
-
   useEffect(() => {
     axios
       .get(`http://localhost:8000/api/users/${studentId}`)
       .then((res) => {
         console.log(res.data);
+        if (res.data === null) navigate("/");
         setStudent(res.data);
       })
       .catch((err) => {

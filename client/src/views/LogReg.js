@@ -5,12 +5,15 @@ import { Link } from "react-router-dom";
 
 const LogReg = () => {
   return (
-    <div className="flex flex-col h-screen">
-      <h1 className="font-medium leading-tight text-5xl text-blue-600">Studio Portal</h1>
+    <div className="flex flex-col min-h-screen">
+      <div className="grid grid-cols-6 p-5">
+        <img src={require("../imgs/studioLogo1.png")} alt="logo" className="col-start-3 col-end-5 scale-50"></img>
+      </div>
+
       {/* <Link to={"/teachers/"} className=" text-decoration-line: underline">
         Teacher Login and Registration
       </Link> */}
-      <div className="flex justify-center m-10">
+      <div className="relative flex flex-grow justify-center">
         <Login />
         <Register />
       </div>

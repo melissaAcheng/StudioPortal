@@ -8,6 +8,7 @@ import ViewNote from "./components/ViewNote";
 import CreateNote from "./components/CreateNote";
 import EditNote from "./components/EditNote";
 import LogReg from "../src/views/LogReg";
+import ErrorPage from "./components/ErrorPage";
 
 function App() {
   // const [isTeacherLoggedIn, setIsTeacherLoggedIn] = useState(false);
@@ -42,6 +43,7 @@ function App() {
             path="/notes/edit/:noteId"
           />
           <Route element={<ViewNote loggedInUser={loggedInUser} />} path="/notes/:noteId" />
+          <Route element={<ErrorPage />} path="*" />
         </Routes>
       </BrowserRouter>
     </div>

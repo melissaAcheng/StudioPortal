@@ -11,20 +11,17 @@ const CreateNote = ({ loggedInUser, studentList }) => {
   const [video, setVideo] = useState("");
   const [student, setStudent] = useState();
 
-  // useEffect(() => {
-  //   axios
-  //     .get("http://localhost:8000/api/users", { withCredentials: true })
-  //     .then((res) => {
-  //       console.log(res.data);
-  //       if (res.data != null) {
-  //         setIsTeacherLoggedIn(true);
-  //       }
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //       navigate("/");
-  //     });
-  // }, []);
+  useEffect(() => {
+    axios
+      .get("http://localhost:8000/api/users", { withCredentials: true })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+        navigate("/");
+      });
+  }, []);
 
   const addNote = (noteParam) => {
     console.log({

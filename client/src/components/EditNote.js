@@ -10,27 +10,18 @@ const EditNote = ({ loggedInUser, studentList }) => {
   const { noteId } = useParams();
 
   const dateInput = (date) => {
-    // const options = { year: "numeric", month: "2-digit", day: "2-digit" };
-    // const d = new Date(date);
-    // const month = d.getMonth() + 1;
-    // const day = d.getDate() + 1;
-    // const year = d.getFullYear();
-    // return `${year}-${month}-${day}`;
     let yourDate = new Date(date);
-    // const offset = yourDate.getTimezoneOffset();
-    // yourDate = new Date(yourDate.getTime() - offset * 60000);
-    // return yourDate.toISOString().split("T")[0];
     const utc = yourDate.getTime() + yourDate.getTimezoneOffset() * 60000;
     const newDate = new Date(utc + 3600000 * -4);
-    // return newDate.toLocaleDateString();
     return yourDate.toISOString().split("T")[0];
   };
-  // debugger;
+
   useEffect(() => {
     axios
       .get(`http://localhost:8000/api/notes/${noteId}`)
       .then((res) => {
         console.log(res.data);
+        if (res.data === null) navigate("/");
         setNote(res.data);
         setLoaded(true);
       })

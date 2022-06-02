@@ -1,6 +1,21 @@
 const dateFormatter = (date) => {
-  const options = { weekday: "long", year: "numeric", month: "short", day: "numeric" };
-  return new Date(date).toLocaleDateString("en-us", options);
+  let d = new Date(date);
+  const days = ["Sunday", "Monday", "Tuesday", "Wednewday", "Thursday", "Friday", "Saturday"];
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  return `${days[d.getUTCDay()]}, ${months[d.getUTCMonth()]} ${d.getUTCDate()}, ${d.getUTCFullYear()}`;
 };
 
 module.exports = { dateFormatter };
