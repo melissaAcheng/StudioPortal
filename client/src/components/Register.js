@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import LogReg from "../views/LogReg";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -55,9 +56,10 @@ const Register = () => {
   };
 
   return (
-    <div className="ml-5">
-      <div className="w-full max-w-md m-auto bg-white rounded-lg border border-primaryBorder shadow-default py-10 px-16">
-        <h1 className="text-2xl font-medium text-primary mt-4 mb-12 text-center">Register</h1>
+    <div className="min-h-full h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-stone-300">
+      <div className="w-full max-w-md m-auto bg-white rounded-lg py-10 px-16">
+        <LogReg heading="Register" paragraph="Already have an account?" linkName="Login" linkUrl="/" />
+        {/* <h1 className="text-2xl font-medium text-primary mt-4 mb-12 text-center">Register</h1> */}
         {confirmReg ? <h4>{confirmReg}</h4> : null}
         <form onSubmit={register}>
           <div>
@@ -74,7 +76,7 @@ const Register = () => {
             </select>
           </div>
           <div>
-            <label>First Name</label>
+            {/* <label>First Name</label> */}
             {errors.firstName ? <p className="text-red-400">{errors.firstName.message}</p> : null}
             <input
               type="text"
@@ -86,7 +88,7 @@ const Register = () => {
             ></input>
           </div>
           <div>
-            <label>Last Name</label>
+            {/* <label>Last Name</label> */}
             {errors.lastName ? <p className="text-red-400">{errors.lastName.message}</p> : null}
             <input
               type="text"
@@ -98,7 +100,7 @@ const Register = () => {
             ></input>
           </div>
           <div>
-            <label>Email</label>
+            {/* <label>Email</label> */}
             {errors.email ? <p className="text-red-400">{errors.email.message}</p> : null}
             <input
               type="text"
@@ -110,7 +112,7 @@ const Register = () => {
             ></input>
           </div>
           <div>
-            <label>Password</label>
+            {/* <label>Password</label> */}
             {errors.password ? <p className="text-red-400">{errors.password.message}</p> : null}
             <input
               type="password"
@@ -122,7 +124,7 @@ const Register = () => {
             ></input>
           </div>
           <div>
-            <label>Confirm Password</label>
+            {/* <label>Confirm Password</label> */}
             {errors.confirmPassword ? <p className="text-red-400">{errors.confirmPassword.message}</p> : null}
             <input
               type="password"

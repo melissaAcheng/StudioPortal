@@ -9,6 +9,8 @@ import CreateNote from "./components/CreateNote";
 import EditNote from "./components/EditNote";
 import LogReg from "../src/views/LogReg";
 import ErrorPage from "./components/ErrorPage";
+import Login from "./components/Login";
+import Register from "./components/Register";
 
 function App() {
   // const [isTeacherLoggedIn, setIsTeacherLoggedIn] = useState(false);
@@ -34,7 +36,9 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route element={<LogReg />} path="/" />
+          <Route path="/" element={<Login />}  />
+          <Route path="/register" element={<Register />}  />
+          
           <Route element={<TeacherHome />} path="/teachers/home" />
           <Route element={<StudentProfile />} path="/students/:studentId" />
           <Route element={<CreateNote loggedInUser={loggedInUser} studentList={studentList} />} path="/notes/addNote" />

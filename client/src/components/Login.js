@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import LogReg from "../views/LogReg";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -38,12 +39,13 @@ const Login = () => {
   };
 
   return (
-    <div className="mr-5">
-      <div className="w-full max-w-md m-auto bg-white rounded-lg border border-primaryBorder shadow-default py-10 px-16">
-        <h1 className="text-2xl font-medium text-primary mt-4 mb-12 text-center">Login</h1>
+    <div className="min-h-full h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-stone-300">
+      <div className="w-full max-w-md m-auto bg-white rounded-lg py-10 px-16">
+        <LogReg heading="Login" paragraph="Don't have an account yet?" linkName="Register" linkUrl="/register" />
+        {/* <h1 className="text-2xl font-medium text-primary mt-4 mb-12 text-center">Login</h1> */}
         <form onSubmit={login}>
           <div>
-            <label>Email</label>
+            {/* <label>Email</label> */}
             <input
               type="email"
               name="email"
@@ -54,7 +56,7 @@ const Login = () => {
             ></input>
           </div>
           <div>
-            <label>Password</label>
+            {/* <label>Password</label> */}
             <input
               type="password"
               name="password"
