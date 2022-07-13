@@ -1,22 +1,19 @@
 import React from "react";
-import Login from "../components/Login";
-import Register from "../components/Register";
 import { Link } from "react-router-dom";
 
-const LogReg = () => {
+const LogReg = ({ heading, paragraph, linkName, linkUrl = "#" }) => {
   return (
-    <div className="flex flex-col min-h-screen">
-      <div className="grid grid-cols-6 p-5">
-        <img src={require("../imgs/studioLogo1.png")} alt="logo" className="col-start-3 col-end-5 scale-50"></img>
+    <div className="mb-10">
+      <div className="flex justify-center">
+        <img src={require("../imgs/studioLogo1.png")} alt="logo" className="col-start-3 col-end-5 scale-100"></img>
       </div>
-
-      {/* <Link to={"/teachers/"} className=" text-decoration-line: underline">
-        Teacher Login and Registration
-      </Link> */}
-      <div className="relative flex flex-grow justify-center">
-        <Login />
-        <Register />
-      </div>
+      <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">{heading}</h2>
+      <p className="mt-2 text-center text-sm text-gray-600 mt-5">
+        {paragraph}{" "}
+        <Link to={linkUrl} className="font-medium text-purple-600 hover:text-purple-500">
+          {linkName}
+        </Link>
+      </p>
     </div>
   );
 };
