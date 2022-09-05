@@ -66,28 +66,41 @@ const TeacherHome = () => {
   return (
     <div>
       <Navbar />
-      <h1 className="font-medium leading-tight text-5xl text-black-600 p-3">
+      {/* <h1 className="font-medium leading-tight text-5xl text-black-600 p-3">
         Welcome {teacher.firstName} {teacher.lastName}
-      </h1>
+      </h1> */}
       <div>
         <h2 className="font-light leading-tight text-3xl text-black-600 p-3">Students</h2>
-        <div className="w-full max-w-md m-auto py-5">
-          {studentList
-            .sort((a, b) => a.lastName.localeCompare(b.lastName))
-            .map((student, index) => {
-              return (
-                <p key={index}>
-                  <Link className="no-underline hover:underline text-blue-500 text-lg" to={`/students/${student._id}`}>
-                    {student.firstName} {student.lastName}
-                  </Link>
-                </p>
-              );
-            })}
-        </div>
+        <table className="table-auto w-full max-w-md py-5">
+          <thead>
+            <tr>
+              <th>Student Name</th>
+              <th>Email</th>
+            </tr>
+          </thead>
+          <tbody>
+            {studentList
+              .sort((a, b) => a.lastName.localeCompare(b.lastName))
+              .map((student, index) => {
+                return (
+                  <tr key={index}>
+                    <td>
+                      <Link
+                        className="no-underline hover:underline text-blue-500 text-lg"
+                        to={`/students/${student._id}`}
+                      >
+                        {student.firstName} {student.lastName}
+                      </Link>
+                    </td>
+                    <td>{student.email}</td>
+                  </tr>
+                );
+              })}
+          </tbody>
+        </table>
         {/* Add Student to List */}
         <form onSubmit={addStudent}>
           <div>
-            {/* <label>Add Student:</label> */}
             <select
               name="student"
               value={student}

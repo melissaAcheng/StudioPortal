@@ -34,15 +34,19 @@ const Navbar = () => {
       });
   };
 
+  const addLessonNote = (e) => {
+    navigate("/notes/addNote");
+  };
+
   return (
-    <div className="flex items-center justify-between flex-wrap border-gray-400 p-3">
+    <div className="flex items-center justify-between flex-wrap border-gray-400 px-2 bg-zinc-300">
       {isTeacherLoggedIn ? (
         <Link to="/teachers/home">
-          <img src={require("../imgs/studioLogo1.png")} alt="logo" className="justify-start w-36" />
+          <img src={require("../imgs/studioLogoTransparent.png")} alt="logo" className="justify-start w-36" />
         </Link>
       ) : (
         <Link to={`/students/${user._id}`}>
-          <img src={require("../imgs/studioLogo1.png")} alt="logo" className="justify-start w-36" />
+          <img src={require("../imgs/studioLogoTransparent.png")} alt="logo" className="justify-start w-36" />
         </Link>
       )}
       <nav>
@@ -97,20 +101,20 @@ const Navbar = () => {
           {isTeacherLoggedIn && (
             <>
               <li>
-                <a
-                  href="/teachers/home"
-                  className="block mt-4 lg:inline-block lg:mt-0 text-black-200 hover:text-gray-500 mr-4"
+                <Link
+                  to="/teachers/home"
+                  className="block mt-4 lg:inline-block lg:mt-0 text-black-200 hover:underline underline-offset-2 mr-4"
                 >
                   Students
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="/notes/addNote"
-                  className="block mt-4 lg:inline-block lg:mt-0 text-black-200 hover:text-gray-500 mr-4"
+                <button
+                  onClick={addLessonNote}
+                  className="block mt-4 lg:inline-block lg:mt-0 text-black-200 hover:underline underline-offset-2 mr-4"
                 >
                   Add Lesson Note
-                </a>
+                </button>
               </li>
             </>
           )}
@@ -124,7 +128,14 @@ const Navbar = () => {
               Logout
             </button>
           </li>
+
+          <li>
+            <p>
+              {user.firstName} {user.lastName}
+            </p>
+          </li>
         </ul>
+ 
       </nav>
 
       <style>{`
