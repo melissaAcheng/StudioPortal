@@ -1,5 +1,7 @@
 const Notes = require("../models/notes.model");
 const jwt = require("jsonwebtoken");
+// const apiKey = process.env.API_KEY;
+// const baseApiUrl = "https://www.googleapis.com/youtube/v3";
 
 module.exports = {
   // queries here

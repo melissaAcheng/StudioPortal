@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
+import SearchVideo from "./SearchVideo";
 
 const NoteForm = ({
   onSubmitProp,
@@ -18,26 +19,18 @@ const NoteForm = ({
   const [description, setDescription] = useState(initialDescription);
   const [video, setVideo] = useState(initialVideo);
 
-  const matchYoutubeUrl = (url) => {
-    let regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
-    let match = url.match(regExp);
-    if (match && match[2].length == 11) {
-      return match[2];
-    } else {
-      return "Video not found";
-    }
-  };
+  // const [selectedVideo, setSelectedVideo] = useState("");
 
   const onSubmitHandler = (e) => {
+    debugger;
     e.preventDefault();
     onSubmitProp({
       student: student,
       date: date,
       description: description,
-      video: matchYoutubeUrl(video),
+      video: video,
       createdBy: teacher,
     });
-    // debugger;
   };
   return (
     <div>
@@ -46,8 +39,8 @@ const NoteForm = ({
       <div className="w-full max-w-md m-auto bg-white rounded-lg border border-primaryBorder shadow-default py-10 px-16">
         <form onSubmit={onSubmitHandler} className="w-full max-w-sm">
           {errors.student ? <p className="text-red-400">Please select a student</p> : null}
-          <div className="flex text-left">
-            <label>Student:</label>
+          <div className="form-group mb-6">
+            <label className="form-label inline-block mb-2 text-gray-700">Student:</label>
             <select
               name="student"
               value={student}
@@ -65,8 +58,8 @@ const NoteForm = ({
             </select>
           </div>
           {errors.date ? <p className="text-red-400">{errors.date.message}</p> : null}
-          <div className="flex text-left">
-            <label>Date:</label>
+          <div className="form-group mb-6">
+            <label className="form-label inline-block mb-2 text-gray-700">Date:</label>
             <input
               type="date"
               name="date"
@@ -76,8 +69,8 @@ const NoteForm = ({
             ></input>
           </div>
           {errors.description ? <p className="text-red-400">{errors.description.message}</p> : null}
-          <div className="flex text-left">
-            <label>Description:</label>
+          <div className="form-group mb-6">
+            <label className="form-label inline-block mb-2 text-gray-700">Description:</label>
             <textarea
               type="text"
               name="description"
@@ -86,8 +79,8 @@ const NoteForm = ({
               className={`w-full p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4`}
             ></textarea>
           </div>
-          <div className="flex text-left">
-            <label>YouTube URL:</label>
+          {/* <div className="form-group mb-6">
+            <label className="form-label inline-block mb-2 text-gray-700">YouTube URL:</label>
             <input
               type="text"
               name="video"
@@ -95,10 +88,29 @@ const NoteForm = ({
               onChange={(e) => setVideo(e.target.value)}
               className={`w-full p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4`}
             ></input>
+          </div> */}
+          <div>
+            <label className="form-label inline-block mb-2 text-gray-700">Videos:</label>
+            <input type="text" name="video" value={video} onChange={(e) => setVideo(e.target.value)} />
+            {video !== "" && (
+              <iframe
+                width="560"
+                height="315"
+                src={`https://www.youtube.com/embed/${video}`}
+                title="YouTube video player"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+            )}
+          </div>
+          <div className="form-group mb-6">
+            <SearchVideo video={video} setVideo={setVideo} />
           </div>
           <div>
             <button
-              className={`bg-gray-500 py-2 px-4 text-sm text-white rounded border border-green focus:outline-none focus:border-green-dark`}
+              type="submit"
+              className={`bg-blue-500 py-2 px-4 text-sm text-white rounded border border-green focus:outline-none focus:border-green-dark`}
             >
               Submit
             </button>
