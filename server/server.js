@@ -2,10 +2,9 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
+const axios = require("axios");
 
 const port = process.env.MY_PORT;
-// const apiKey = process.env.API_KEY;
-// const baseApiUrl = "https://www.googleapis.com/youtube/v3";
 
 const app = express();
 
@@ -19,8 +18,25 @@ app.use(
 );
 app.use(cookieParser());
 
+// eventually move this over to controller and routes to get input from user
+// app.get("/api/videos", async (req, res) => {
+//   try {
+//     const searchQuery = req.query.search_query;
+//     console.log(searchQuery);
+//     const url = `${baseApiUrl}/search?key=${apiKey}&type=video&part=snippet&q=${searchQuery}`;
+//     const response = await axios.get(url);
+//     // const titles = response.data.items.map((item) => item.snippet.title);
+//     const ids = response.data.items.map((item) => item.id.videoId);
+//     res.send(ids);
+//   } catch (err) {
+//     res.json(err);
+//     // next(err);
+//   }
+// });
+
 require("./routes/notes.routes")(app);
 require("./routes/user.routes")(app);
+require("./routes/youtube.routes")(app);
 
 require("./config/mongoose.config");
 
