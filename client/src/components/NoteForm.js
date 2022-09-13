@@ -19,8 +19,6 @@ const NoteForm = ({
   const [description, setDescription] = useState(initialDescription);
   const [video, setVideo] = useState(initialVideo);
 
-  // const [selectedVideo, setSelectedVideo] = useState("");
-
   const onSubmitHandler = (e) => {
     debugger;
     e.preventDefault();
@@ -47,7 +45,7 @@ const NoteForm = ({
               onChange={(e) => setStudent(e.target.value)}
               className="border-slate-300 hover:border-indigo-300 w-full p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4"
             >
-              <option>-------------</option>
+              <option>Select Student</option>
               {studentList.map((student, index) => {
                 return (
                   <option key={index} value={student._id}>
@@ -79,23 +77,13 @@ const NoteForm = ({
               className={`w-full p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4`}
             ></textarea>
           </div>
-          {/* <div className="form-group mb-6">
-            <label className="form-label inline-block mb-2 text-gray-700">YouTube URL:</label>
-            <input
-              type="text"
-              name="video"
-              value={video}
-              onChange={(e) => setVideo(e.target.value)}
-              className={`w-full p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4`}
-            ></input>
-          </div> */}
           <div>
             <label className="form-label inline-block mb-2 text-gray-700">Videos:</label>
-            <input type="text" name="video" value={video} onChange={(e) => setVideo(e.target.value)} />
+            <input type="hidden" name="video" value={video} onChange={(e) => setVideo(e.target.value)} />
             {video !== "" && (
               <iframe
-                width="560"
-                height="315"
+                width="100%"
+                height="50%"
                 src={`https://www.youtube.com/embed/${video}`}
                 title="YouTube video player"
                 frameBorder="0"

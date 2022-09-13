@@ -11,8 +11,6 @@ import LogReg from "../src/views/LogReg";
 import ErrorPage from "./components/ErrorPage";
 import Login from "./components/Login";
 import Register from "./components/Register";
-import AddVideo from "./components/SearchVideo";
-import SearchVideo from "./components/SearchVideo";
 
 function App() {
   // const [isTeacherLoggedIn, setIsTeacherLoggedIn] = useState(false);
@@ -50,7 +48,6 @@ function App() {
           />
           <Route element={<ViewNote loggedInUser={loggedInUser} />} path="/notes/:noteId" />
           <Route element={<ErrorPage />} path="*" />
-          <Route element={<SearchVideo />} path="/videos/:search" />
         </Routes>
       </BrowserRouter>
     </div>
