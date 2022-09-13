@@ -2,15 +2,9 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import NoteForm from "./NoteForm";
-import SearchVideo from "./SearchVideo";
 
 const CreateNote = ({ loggedInUser, studentList }) => {
-  const [isTeacherLoggedIn, setIsTeacherLoggedIn] = useState(false);
   const navigate = useNavigate();
-  const [date, setDate] = useState("");
-  const [description, setDescription] = useState("");
-  const [video, setVideo] = useState("");
-  const [student, setStudent] = useState();
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
@@ -40,7 +34,7 @@ const CreateNote = ({ loggedInUser, studentList }) => {
       .then((res) => {
         console.log("success", res);
         setErrors({});
-        navigate("/teachers/home");
+        navigate(`/students/${noteParam.student}`);
       })
       .catch((err) => {
         console.log("errors", err.response.data.errors);

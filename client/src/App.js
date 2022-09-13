@@ -7,7 +7,6 @@ import StudentProfile from "./components/StudentProfile";
 import ViewNote from "./components/ViewNote";
 import CreateNote from "./components/CreateNote";
 import EditNote from "./components/EditNote";
-import LogReg from "../src/views/LogReg";
 import ErrorPage from "./components/ErrorPage";
 import Login from "./components/Login";
 import Register from "./components/Register";

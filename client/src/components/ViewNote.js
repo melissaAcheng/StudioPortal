@@ -10,7 +10,6 @@ const ViewNote = ({ loggedInUser }) => {
   const [createdBy, setCreatedBy] = useState({});
   let { noteId } = useParams();
 
-  // debugger;
   console.log("USER", loggedInUser);
   console.log("NOTE", note);
 

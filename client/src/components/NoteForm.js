@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
 import Navbar from "./Navbar";
 import SearchVideo from "./SearchVideo";
 
@@ -20,7 +18,6 @@ const NoteForm = ({
   const [video, setVideo] = useState(initialVideo);
 
   const onSubmitHandler = (e) => {
-    debugger;
     e.preventDefault();
     onSubmitProp({
       student: student,
