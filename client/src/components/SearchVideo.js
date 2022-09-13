@@ -59,21 +59,25 @@ const SearchVideo = ({ video, setVideo }) => {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-4">
+      <div>
         <div>
           {videoList.map((video, i) => {
             return (
               <div key={i}>
                 <iframe
-                  width="560"
-                  height="315"
+                  width="100%"
+                  height="50%"
                   src={`https://www.youtube.com/embed/${video.id.videoId}`}
                   title="YouTube video player"
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                 ></iframe>
-                <button type="button" onClick={() => handleSelect(video.id.videoId)}>
+                <button
+                  className="underline text-blue-600"
+                  type="button"
+                  onClick={() => handleSelect(video.id.videoId)}
+                >
                   {video.snippet.title}
                 </button>
                 ;
