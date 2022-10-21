@@ -42,11 +42,13 @@ const Navbar = () => {
     <div className="flex items-center justify-between flex-wrap border-gray-400 px-2 bg-zinc-300">
       {isTeacherLoggedIn ? (
         <Link to="/teachers/home">
-          <img src={require("../imgs/studioLogoTransparent.png")} alt="logo" className="justify-start w-36" />
+          <h1 className="text-2xl m-2">Studio Portal</h1>
+          {/* <img src={require("../imgs/music-staff.png")} alt="logo" className="justify-start w-36" /> */}
         </Link>
       ) : (
         <Link to={`/students/${user._id}`}>
-          <img src={require("../imgs/studioLogoTransparent.png")} alt="logo" className="justify-start w-36" />
+          <h1 className="text-2xl m-2">Studio Portal</h1>
+          {/* <img src={require("../imgs/music-staff.png")} alt="logo" className="justify-start w-36" /> */}
         </Link>
       )}
       <nav>
@@ -135,7 +137,6 @@ const Navbar = () => {
             </p>
           </li>
         </ul>
- 
       </nav>
 
       <style>{`
