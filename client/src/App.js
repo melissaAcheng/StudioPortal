@@ -18,7 +18,7 @@ function App() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/users", { withCredentials: true })
+      .get("https://studio-portal.onrender.com", { withCredentials: true })
       .then((res) => {
         console.log(res.data);
         if (res.data != null) {
