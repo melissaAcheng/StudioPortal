@@ -3,8 +3,10 @@ const express = require("express");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const axios = require("axios");
+const mongoose = require("mongoose");
 
 const port = process.env.MY_PORT;
+const mongoURI = process.env.MONGO_URI;
 
 const app = express();
 
@@ -22,6 +24,13 @@ require("./routes/notes.routes")(app);
 require("./routes/user.routes")(app);
 require("./routes/youtube.routes")(app);
 
-require("./config/mongoose.config");
+// require("./config/mongoose.config");\
+mongoose
+	.connect(mongoURI)
+	.then(() => console.log(`You are connected to mongoDB`))
+	.then(() => {
+		app.listen(port, () => console.log(`Server connected on port ${port}`));
+	})
+	.catch((err) => console.log(err));
 
-app.listen(port, () => console.log(`Server connected on port ${port}`));
+// app.listen(port, () => console.log(`Server connected on port ${port}`));
