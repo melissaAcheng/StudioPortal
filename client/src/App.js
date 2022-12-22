@@ -12,45 +12,45 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 
 function App() {
-  // const [isTeacherLoggedIn, setIsTeacherLoggedIn] = useState(false);
-  const [loggedInUser, setLoggedInUser] = useState([]);
-  const [studentList, setStudentList] = useState([]);
+	// const [isTeacherLoggedIn, setIsTeacherLoggedIn] = useState(false);
+	const [loggedInUser, setLoggedInUser] = useState([]);
+	const [studentList, setStudentList] = useState([]);
 
-  useEffect(() => {
-    axios
-      .get("https://studio-portal.onrender.com", { withCredentials: true })
-      .then((res) => {
-        console.log(res.data);
-        if (res.data != null) {
-          setLoggedInUser(res.data);
-          setStudentList(res.data.students);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+	useEffect(() => {
+		axios
+			.get("http://localhost:8000/api/users", { withCredentials: true })
+			.then((res) => {
+				console.log(res.data);
+				if (res.data != null) {
+					setLoggedInUser(res.data);
+					setStudentList(res.data.students);
+				}
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	}, []);
 
-  return (
-    <div className="App">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+	return (
+		<div className="App">
+			<BrowserRouter>
+				<Routes>
+					<Route path="/" element={<Login />} />
+					<Route path="/register" element={<Register />} />
 
-          <Route element={<TeacherHome />} path="/teachers/home" />
-          <Route element={<StudentProfile />} path="/students/:studentId" />
-          <Route element={<CreateNote loggedInUser={loggedInUser} studentList={studentList} />} path="/notes/addNote" />
-          <Route
-            element={<EditNote loggedInUser={loggedInUser} studentList={studentList} />}
-            path="/notes/edit/:noteId"
-          />
-          <Route element={<ViewNote loggedInUser={loggedInUser} />} path="/notes/:noteId" />
-          <Route element={<ErrorPage />} path="*" />
-        </Routes>
-      </BrowserRouter>
-    </div>
-  );
+					<Route element={<TeacherHome />} path="/teachers/home" />
+					<Route element={<StudentProfile />} path="/students/:studentId" />
+					<Route element={<CreateNote loggedInUser={loggedInUser} studentList={studentList} />} path="/notes/addNote" />
+					<Route
+						element={<EditNote loggedInUser={loggedInUser} studentList={studentList} />}
+						path="/notes/edit/:noteId"
+					/>
+					<Route element={<ViewNote loggedInUser={loggedInUser} />} path="/notes/:noteId" />
+					<Route element={<ErrorPage />} path="*" />
+				</Routes>
+			</BrowserRouter>
+		</div>
+	);
 }
 
 export default App;
