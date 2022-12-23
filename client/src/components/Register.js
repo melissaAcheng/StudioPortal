@@ -45,6 +45,7 @@ const Register = () => {
 				// setConfirmReg("Thank you for registering. Please log in with your credentials");
 				setErrors({});
 				if (res.data.user.role === "teacher") {
+					console.log("ROLE", res.data.user.role);
 					navigate("/teachers/home");
 				} else {
 					navigate(`/students/${res.data.user._id}`);
