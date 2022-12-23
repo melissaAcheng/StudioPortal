@@ -29,7 +29,7 @@ const Register = () => {
 		e.preventDefault();
 
 		axios
-			.post(`${URL}/api/users/login/register`, user, {
+			.post(`${URL}/api/users/register`, user, {
 				withCredentials: true,
 			})
 			.then((res) => {
