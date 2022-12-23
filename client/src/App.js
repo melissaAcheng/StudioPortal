@@ -11,6 +11,8 @@ import ErrorPage from "./components/ErrorPage";
 import Login from "./components/Login";
 import Register from "./components/Register";
 
+export const URL = process.env.REACT_APP_BACKEND_URL;
+
 function App() {
 	// const [isTeacherLoggedIn, setIsTeacherLoggedIn] = useState(false);
 	const [loggedInUser, setLoggedInUser] = useState([]);
@@ -18,7 +20,7 @@ function App() {
 
 	useEffect(() => {
 		axios
-			.get(`http://localhost:8000/api/users`, { withCredentials: true })
+			.get(`${URL}/api/users`, { withCredentials: true })
 			.then((res) => {
 				console.log(res.data);
 				if (res.data != null) {
