@@ -21,6 +21,7 @@ const Login = () => {
 				},
 				{
 					withCredentials: true,
+					credentials: "include",
 				}
 			)
 			.then((res) => {
