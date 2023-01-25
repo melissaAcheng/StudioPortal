@@ -47,11 +47,15 @@ module.exports = {
 			process.env.JWT_SECRET
 		);
 
-		res.cookie("usertoken", userToken, process.env.JWT_SECRET).json({
-			msg: "You have successfully logged in!",
-			userId: user._id,
-			userRole: user.role,
-		});
+		res
+			.cookie("usertoken", userToken, process.env.JWT_SECRET, {
+				expires: new Date(Date.now() + 90000000),
+			})
+			.json({
+				msg: "You have successfully logged in!",
+				userId: user._id,
+				userRole: user.role,
+			});
 	},
 	logoutUser: (req, res) => {
 		console.log("logging out");
