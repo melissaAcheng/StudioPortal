@@ -12,13 +12,13 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 app.use(
 	cors({
 		origin: ["http://localhost:3000", "https://studio-portal.onrender.com"],
 		credentials: true,
 	})
 );
-app.use(cookieParser());
 
 require("./routes/notes.routes")(app);
 require("./routes/user.routes")(app);
