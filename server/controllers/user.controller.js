@@ -13,11 +13,7 @@ module.exports = {
 					process.env.JWT_SECRET
 				);
 
-				res
-					.cookie("usertoken", userToken, process.env.JWT_SECRET, {
-						httpOnly: true,
-					})
-					.json({ msg: "success!", user: user });
+				res.cookie("usertoken", userToken, process.env.JWT_SECRET).json({ msg: "success!", user: user });
 			})
 			.catch((err) => res.status(400).json(err));
 	},
@@ -53,7 +49,6 @@ module.exports = {
 
 		res
 			.cookie("usertoken", userToken, process.env.JWT_SECRET, {
-				httpOnly: true,
 				expires: new Date(Date.now() + 90000000),
 			})
 			.json({
