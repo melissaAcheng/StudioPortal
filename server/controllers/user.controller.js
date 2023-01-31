@@ -35,6 +35,7 @@ module.exports = {
 		}
 
 		console.log("email password match");
+
 		const userToken = jwt.sign(
 			{
 				id: user._id,
@@ -70,6 +71,8 @@ module.exports = {
 		const decodedJWT = jwt.decode(req.cookies.usertoken, {
 			complete: true,
 		});
+
+		console.log("jwtdebugger", decodedJWT);
 
 		User.findOne({
 			_id: decodedJWT.payload.id,
