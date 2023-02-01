@@ -19,14 +19,16 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
 	cors({
-		origin: ["http://localhost:3000", "vercel.app"],
+		origin: ["http://localhost:3000", "vercel.app", "https://studio-portal-beryl.vercel.app"],
 		credentials: true,
+		exposedHeaders: ["usertoken"],
 	})
 );
 app.use(cookieParser());
 
 app.use((req, res, next) => {
 	res.header("Access-Control-Allow-Credentials", true);
+	res.header("Access-Control-ALlow-Origin", "https://studio-portal-beryl.vercel.app");
 	res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,UPDATE,OPTIONS");
 	res.header("Access-Control-Allow-Headers", "X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept");
 	next();

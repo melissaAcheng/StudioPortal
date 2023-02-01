@@ -55,7 +55,7 @@ module.exports = {
 				secure: true,
 				sameSite: "None",
 				expires: new Date(Date.now() + 90000000),
-				domain: "vercel.app",
+				domain: "https://studio-portal-beryl.vercel.app",
 			})
 			.json({
 				msg: "You have successfully logged in!",
