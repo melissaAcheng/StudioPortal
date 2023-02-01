@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
 	cors({
-		origin: ["http://localhost:3000", "https://studio-portal-beryl.vercel.app"],
+		origin: ["http://localhost:3000", "https://studio-portal-app.vercel.app"],
 		credentials: true,
 	})
 );
@@ -40,7 +40,6 @@ mongoose
 
 // all your routes should go here
 // app.use('/some-route', require(path.join(__dirname,'routes', 'notes.route.js')));
-
 
 // app.listen(port, () => console.log(`Server connected on port ${port}`));
 
