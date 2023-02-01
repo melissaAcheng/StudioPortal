@@ -1,16 +1,17 @@
 require("dotenv").config();
-const express = require("express");
-const cors = require("cors");
-const cookieParser = require("cookie-parser");
-const axios = require("axios");
-const mongoose = require("mongoose");
-
-const port = process.env.MY_PORT;
-const mongoURI = process.env.MONGO_URI;
 
 if (process.env.NODE_ENV !== "production") {
 	require("dotenv").config({ path: __dirname + "/.env" });
 }
+
+const express = require("express");
+const cors = require("cors");
+const cookieParser = require("cookie-parser");
+const mongoose = require("mongoose");
+const path = require("path");
+
+const port = process.env.MY_PORT;
+const mongoURI = process.env.MONGO_URI;
 
 const app = express();
 
@@ -36,6 +37,10 @@ mongoose
 		app.listen(port, () => console.log(`Server connected on port ${port}`));
 	})
 	.catch((err) => console.log(err));
+
+// all your routes should go here
+// app.use('/some-route', require(path.join(__dirname,'routes', 'notes.route.js')));
+
 
 // app.listen(port, () => console.log(`Server connected on port ${port}`));
 
