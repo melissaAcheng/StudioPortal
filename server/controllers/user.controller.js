@@ -50,7 +50,7 @@ module.exports = {
 		);
 
 		res
-			.cookie("usertoken", userToken, process.env.JWT_SECRET, {
+			.cookie("usertoken", userToken, {
 				httpOnly: true,
 				secure: true,
 				sameSite: "none",
