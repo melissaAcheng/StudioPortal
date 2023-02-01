@@ -11,6 +11,10 @@ module.exports = {
 		// 	return res.sendStatus(401);
 		// }
 
+		// let token = req.cookies.usertoken;
+		// token = token["Authorization"];
+		// console.log("TOKEN", token);
+
 		jwt.verify(req.cookies.usertoken, process.env.JWT_SECRET, (err, payload) => {
 			if (err) {
 				console.log(err);

@@ -16,7 +16,6 @@ app.use(
 	cors({
 		origin: ["http://localhost:3000", "https://studio-portal-beryl.vercel.app"],
 		credentials: true,
-		exposedHeaders: ["usertoken"],
 	})
 );
 app.use(cookieParser());
