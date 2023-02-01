@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
 	cors({
-		origin: ["http://localhost:3000", "https://studio-portal-app.vercel.app"],
+		origin: ["http://localhost:3000", "https://studio-portal-beryl.vercel.app"],
 		credentials: true,
 	})
 );
