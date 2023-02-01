@@ -1,14 +1,14 @@
 require("dotenv").config();
 
-if (process.env.NODE_ENV !== "production") {
-	require("dotenv").config({ path: __dirname + "/.env" });
-}
+// if (process.env.NODE_ENV !== "production") {
+// 	require("dotenv").config({ path: __dirname + "/.env" });
+// }
 
 const express = require("express");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const mongoose = require("mongoose");
-const path = require("path");
+// const path = require("path");
 
 const port = process.env.MY_PORT;
 const mongoURI = process.env.MONGO_URI;

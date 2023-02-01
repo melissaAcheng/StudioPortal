@@ -36,7 +36,7 @@ function App() {
 
 	return (
 		<div className="App">
-			<BrowserRouter basename="/">
+			<BrowserRouter>
 				<Routes>
 					<Route path="/" element={<Login />} />
 					<Route path="/register" element={<Register />} />
