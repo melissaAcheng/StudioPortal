@@ -45,15 +45,20 @@ module.exports = {
 				role: user.role,
 				students: user.students,
 			},
-			process.env.JWT_SECRET
+			process.env.JWT_SECRET,
+			{ expiresIn: "1h" }
 		);
 
 		res
 			.cookie("usertoken", userToken, process.env.JWT_SECRET, {
+				httpOnly: true,
+				secure: true,
+				sameSite: "None",
 				expires: new Date(Date.now() + 90000000),
 			})
 			.json({
 				msg: "You have successfully logged in!",
+				token: userToken, // for debugging purposes
 				userId: user._id,
 				userRole: user.role,
 			});
@@ -86,6 +91,7 @@ module.exports = {
 				console.log(err);
 			});
 	},
+	
 	getOneUser: (req, res) => {
 		User.findOne({ _id: req.params.id })
 			.then((oneUser) => {
