@@ -53,7 +53,7 @@ module.exports = {
 			.cookie("usertoken", userToken, process.env.JWT_SECRET, {
 				httpOnly: true,
 				secure: true,
-				sameSite: "None",
+				sameSite: "none",
 				expires: new Date(Date.now() + 90000000),
 				domain: "https://studio-portal-beryl.vercel.app",
 			})
