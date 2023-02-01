@@ -55,6 +55,7 @@ module.exports = {
 				secure: true,
 				sameSite: "None",
 				expires: new Date(Date.now() + 90000000),
+				domain: "vercel.app",
 			})
 			.json({
 				msg: "You have successfully logged in!",
@@ -91,7 +92,7 @@ module.exports = {
 				console.log(err);
 			});
 	},
-	
+
 	getOneUser: (req, res) => {
 		User.findOne({ _id: req.params.id })
 			.then((oneUser) => {

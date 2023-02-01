@@ -25,6 +25,13 @@ app.use(
 );
 app.use(cookieParser());
 
+app.use((req, res, next) => {
+	res.header("Access-Control-Allow-Credentials", true);
+	res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,UPDATE,OPTIONS");
+	res.header("Access-Control-Allow-Headers", "X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept");
+	next();
+});
+
 require("./routes/notes.routes")(app);
 require("./routes/user.routes")(app);
 require("./routes/youtube.routes")(app);
@@ -44,9 +51,9 @@ mongoose
 // app.listen(port, () => console.log(`Server connected on port ${port}`));
 
 // static files (build of your frontend)
-if (process.env.NODE_ENV === "production") {
-	app.use(express.static(path.join(__dirname, "../client", "build")));
-	app.get("/*", (req, res) => {
-		res.sendFile(path.join(__dirname, "../client", "build", "index.html"));
-	});
-}
+// if (process.env.NODE_ENV === "production") {
+// 	app.use(express.static(path.join(__dirname, "../client", "build")));
+// 	app.get("/*", (req, res) => {
+// 		res.sendFile(path.join(__dirname, "../client", "build", "index.html"));
+// 	});
+// }
