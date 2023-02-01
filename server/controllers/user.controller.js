@@ -55,7 +55,8 @@ module.exports = {
 				secure: true,
 				sameSite: "none",
 				expires: new Date(Date.now() + 90000000),
-				domain: "studio-portal-beryl.vercel.app",
+				domain:
+					process.env.NODE_ENV === "production" ? "https://studio-portal-beryl.vercel.app" : "http://localhost:3000",
 			})
 			.json({
 				msg: "You have successfully logged in!",
