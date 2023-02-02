@@ -13,7 +13,14 @@ module.exports = {
 					process.env.JWT_SECRET
 				);
 
-				res.cookie("usertoken", userToken, process.env.JWT_SECRET).json({ msg: "success!", user: user });
+				res
+					.cookie("usertoken", userToken, {
+						httpOnly: true,
+						secure: true,
+						sameSite: "none",
+						expires: new Date(Date.now() + 90000000),
+					})
+					.json({ msg: "success!", user: user });
 			})
 			.catch((err) => res.status(400).json(err));
 	},
@@ -55,8 +62,6 @@ module.exports = {
 				secure: true,
 				sameSite: "none",
 				expires: new Date(Date.now() + 90000000),
-				domain:
-					process.env.NODE_ENV === "production" ? "studio-portal-beryl.vercel.app" : "http://localhost:3000",
 			})
 			.json({
 				msg: "You have successfully logged in!",
