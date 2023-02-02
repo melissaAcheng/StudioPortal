@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "builds": [
+    { "src": "./server/server.js", "use": "@vercel/node" },
+    { "src": "./client/build", "use": "@vercel/static" }
+  ],
+  "rewrites": [
+    { "src": "/(.*)", "dest": "./server/server.js"}
+  ]
+}
