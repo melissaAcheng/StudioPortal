@@ -38,10 +38,6 @@ app.use(cookieParser());
 // 	next();
 // });
 
-require("./routes/notes.routes")(app);
-require("./routes/user.routes")(app);
-require("./routes/youtube.routes")(app);
-
 // require("./config/mongoose.config");\
 mongoose
 	.connect(mongoURI)
@@ -63,3 +59,7 @@ if (process.env.NODE_ENV === "production") {
 		res.sendFile(path.join(__dirname, "../client", "build", "index.html"));
 	});
 }
+
+require("./routes/notes.routes")(app);
+require("./routes/user.routes")(app);
+require("./routes/youtube.routes")(app);
