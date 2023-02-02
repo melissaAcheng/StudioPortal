@@ -14,7 +14,6 @@ import Register from "./components/Register";
 export const URL = process.env.REACT_APP_BACKEND_URL;
 
 function App() {
-	axios.defaults.withCredentials = true;
 	// const [isTeacherLoggedIn, setIsTeacherLoggedIn] = useState(false);
 	const [loggedInUser, setLoggedInUser] = useState([]);
 	const [studentList, setStudentList] = useState([]);
@@ -36,7 +35,7 @@ function App() {
 
 	return (
 		<div className="App">
-			<BrowserRouter>
+			<BrowserRouter basename="/">
 				<Routes>
 					<Route path="/" element={<Login />} />
 					<Route path="/register" element={<Register />} />
