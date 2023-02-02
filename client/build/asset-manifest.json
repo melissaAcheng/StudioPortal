@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/static/css/main.25282612.css",
-    "main.js": "/static/js/main.e604f611.js",
-    "static/js/787.c4e7f8f9.chunk.js": "/static/js/787.c4e7f8f9.chunk.js",
-    "static/media/music-staff.png": "/static/media/music-staff.cbad4194612e2c8b580d.png",
-    "index.html": "/index.html",
-    "main.25282612.css.map": "/static/css/main.25282612.css.map",
-    "main.e604f611.js.map": "/static/js/main.e604f611.js.map",
-    "787.c4e7f8f9.chunk.js.map": "/static/js/787.c4e7f8f9.chunk.js.map"
+    "main.css": "/studio-portal-app.vercel.app/static/css/main.25282612.css",
+    "main.js": "/studio-portal-app.vercel.app/static/js/main.39b323ad.js",
+    "static/js/787.c4e7f8f9.chunk.js": "/studio-portal-app.vercel.app/static/js/787.c4e7f8f9.chunk.js",
+    "static/media/music-staff.png": "/studio-portal-app.vercel.app/static/media/music-staff.cbad4194612e2c8b580d.png",
+    "index.html": "/studio-portal-app.vercel.app/index.html",
+    "main.25282612.css.map": "/studio-portal-app.vercel.app/static/css/main.25282612.css.map",
+    "main.39b323ad.js.map": "/studio-portal-app.vercel.app/static/js/main.39b323ad.js.map",
+    "787.c4e7f8f9.chunk.js.map": "/studio-portal-app.vercel.app/static/js/787.c4e7f8f9.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.25282612.css",
-    "static/js/main.e604f611.js"
+    "static/js/main.39b323ad.js"
   ]
 }
