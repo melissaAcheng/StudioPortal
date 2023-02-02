@@ -49,6 +49,9 @@ mongoose
 
 // all your routes should go here
 // app.use('/api/users/register', require(path.join(__dirname,'routes', 'user.routes.js')));
+require("./routes/notes.routes")(app);
+require("./routes/user.routes")(app);
+require("./routes/youtube.routes")(app);
 
 // app.listen(port, () => console.log(`Server connected on port ${port}`));
 
@@ -60,6 +63,3 @@ if (process.env.NODE_ENV === "production") {
 	});
 }
 
-require("./routes/notes.routes")(app);
-require("./routes/user.routes")(app);
-require("./routes/youtube.routes")(app);
