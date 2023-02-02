@@ -5,6 +5,6 @@
     { "src": "./client/build", "use": "@vercel/static" }
   ],
   "rewrites": [
-    { "src": "/(.*)", "dest": "./server/server.js"}
+    { "source": "/(.*)", "destination": "/server/server.js"}
   ]
 }
