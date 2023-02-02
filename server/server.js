@@ -1,14 +1,14 @@
-require("dotenv").config();
+// require("dotenv").config();
 
-// if (process.env.NODE_ENV !== "production") {
-// 	require("dotenv").config({ path: __dirname + "/.env" });
-// }
+if (process.env.NODE_ENV !== "production") {
+	require("dotenv").config({ path: __dirname + "/.env" });
+}
 
 const express = require("express");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const mongoose = require("mongoose");
-// const path = require("path");
+const path = require("path");
 
 const port = process.env.MY_PORT;
 const mongoURI = process.env.MONGO_URI;
@@ -52,14 +52,14 @@ mongoose
 	.catch((err) => console.log(err));
 
 // all your routes should go here
-// app.use('/some-route', require(path.join(__dirname,'routes', 'notes.route.js')));
+// app.use('/api/users/register', require(path.join(__dirname,'routes', 'user.routes.js')));
 
 // app.listen(port, () => console.log(`Server connected on port ${port}`));
 
 // static files (build of your frontend)
-// if (process.env.NODE_ENV === "production") {
-// 	app.use(express.static(path.join(__dirname, "../client", "build")));
-// 	app.get("/*", (req, res) => {
-// 		res.sendFile(path.join(__dirname, "../client", "build", "index.html"));
-// 	});
-// }
+if (process.env.NODE_ENV === "production") {
+	app.use(express.static(path.join(__dirname, "../client", "build")));
+	app.get("/*", (req, res) => {
+		res.sendFile(path.join(__dirname, "../client", "build", "index.html"));
+	});
+}
