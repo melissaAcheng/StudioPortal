@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
 	cors({
-		origin: ["https://studio-portal.vercel.app", "http://localhost:3000"],
+		origin: ["https://studio-portal-app.vercel.app", "http://localhost:3000"],
 		credentials: true,
 		exposedHeaders: ["usertoken"],
 	})
@@ -62,4 +62,3 @@ if (process.env.NODE_ENV === "production") {
 		res.sendFile(path.join(__dirname, "../client", "build", "index.html"));
 	});
 }
-
